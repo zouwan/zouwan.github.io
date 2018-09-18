@@ -3,9 +3,9 @@ title: 噢!乖
 subtitle: 乖乖
 welcome_message: 
 #description: Vno Jekyll is a port of my Ghost theme vno.
-#creator: <a href="http://xxx">@onevcat</a>
+#creator: <a href="http://xxx">@xxxx</a>
 
-#url: "http://vno.onevcat.com"
+#url: "http://vno.xxxx.com"
 
 permalink: /:year/:month/:title/
 
@@ -22,7 +22,7 @@ blog_button:
 
 # Navigation buttons in the front page.
 #nav:
-#    - {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
+#    - {title: Projects, description: My Projects, url: 'http://project.xxxx.com'}
 #    - {title: Another Button, description: A button, url: 'http://example.com'}
 
 # Pagination
@@ -37,9 +37,9 @@ comment:
     
 # Social
 social:
-#    weibo: onevcat
+#    weibo: xxxx
     github: zouwan
-#    twitter: onevcat
+#    twitter: xxxx
 #    gplus: 107108267983477358170
     mail: zouwan@gmail.com
 
@@ -47,3 +47,5 @@ social:
 ga:
     # id: your_ga_id
     # host: your_host
+
+markdown_ext: "md,markdown,mkd"
