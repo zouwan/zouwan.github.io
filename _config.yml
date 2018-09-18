@@ -1,11 +1,11 @@
 # Basic
-title: Vno Jekyll
-subtitle: A blog-orientation theme for Jekyll
-welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
-description: Vno Jekyll is a port of my Ghost theme vno.
-creator: <a href="http://onev.cat">@onevcat</a>
+title: 噢!乖
+subtitle: 乖乖
+welcome_message: 
+#description: Vno Jekyll is a port of my Ghost theme vno.
+#creator: <a href="http://xxx">@onevcat</a>
 
-url: "http://vno.onevcat.com"
+#url: "http://vno.onevcat.com"
 
 permalink: /:year/:month/:title/
 
@@ -21,9 +21,9 @@ blog_button:
     description: Visit blog
 
 # Navigation buttons in the front page.
-nav:
-    - {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
-    # - {title: Another Button, description: A button, url: 'http://example.com'}
+#nav:
+#    - {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
+#    - {title: Another Button, description: A button, url: 'http://example.com'}
 
 # Pagination
 gems: [jekyll-paginate]
@@ -37,11 +37,11 @@ comment:
     
 # Social
 social:
-    weibo: onevcat
-    github: onevcat
-    twitter: onevcat
-    gplus: 107108267983477358170
-    mail: onev@onevcat.com
+#    weibo: onevcat
+    github: zouwan
+#    twitter: onevcat
+#    gplus: 107108267983477358170
+    mail: zouwan@gmail.com
 
 # Google Analytics
 ga:
