@@ -48,5 +48,5 @@ ga:
     # id: your_ga_id
     # host: your_host
 
-markdown: redcarpet
+#markdown: redcarpet
 markdown_ext: "md,markdown,mkd"

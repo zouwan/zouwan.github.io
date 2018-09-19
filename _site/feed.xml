@@ -3,10 +3,10 @@
   <channel>
     <title>噢!乖</title>
     <description></description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 18 Sep 2018 22:49:02 +0800</pubDate>
-    <lastBuildDate>Tue, 18 Sep 2018 22:49:02 +0800</lastBuildDate>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 19 Sep 2018 08:35:31 +0800</pubDate>
+    <lastBuildDate>Wed, 19 Sep 2018 08:35:31 +0800</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -16,8 +16,42 @@
 &lt;h4 id=&quot;背景&quot;&gt;背景&lt;/h4&gt;
 </description>
         <pubDate>Tue, 18 Sep 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/09/%E8%AF%8D%E5%90%91%E9%87%8F/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/09/%E8%AF%8D%E5%90%91%E9%87%8F/</guid>
+        <link>/2018/09/%E8%AF%8D%E5%90%91%E9%87%8F/</link>
+        <guid isPermaLink="true">/2018/09/%E8%AF%8D%E5%90%91%E9%87%8F/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>从零搭建酒店类垂直搜索系统</title>
+        <description>&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;13年有机会帮前东家重构了搜索系统，一直忙忙碌碌，也没回头梳理一下，这里希望能把自己的实践和思考记录下来&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+
+&lt;h3 id=&quot;选型&quot;&gt;选型&lt;/h3&gt;
+
+&lt;h3 id=&quot;架构&quot;&gt;架构&lt;/h3&gt;
+
+&lt;h3 id=&quot;策略&quot;&gt;策略&lt;/h3&gt;
+</description>
+        <pubDate>Tue, 18 Sep 2018 00:00:00 +0800</pubDate>
+        <link>/2018/09/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E9%85%92%E5%BA%97%E7%B1%BB%E5%9E%82%E7%9B%B4%E6%90%9C%E7%B4%A2%E7%B3%BB%E7%BB%9F/</link>
+        <guid isPermaLink="true">/2018/09/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E9%85%92%E5%BA%97%E7%B1%BB%E5%9E%82%E7%9B%B4%E6%90%9C%E7%B4%A2%E7%B3%BB%E7%BB%9F/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Elasticsearch学习笔记</title>
+        <description>&lt;h1 id=&quot;elasticsearch-学习笔记&quot;&gt;ElasticSearch 学习笔记&lt;/h1&gt;
+&lt;h3 id=&quot;-adsfasdfasfasfasf&quot;&gt;😆 adsfasdfasfasfasf&lt;/h3&gt;
+</description>
+        <pubDate>Tue, 18 Sep 2018 00:00:00 +0800</pubDate>
+        <link>/2018/09/ElasticSearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+        <guid isPermaLink="true">/2018/09/ElasticSearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
         
         
       </item>
@@ -26,7 +60,8 @@
         <title>Hello World - Vno</title>
         <description>&lt;h4 id=&quot;whats-this&quot;&gt;What’s this&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images//15372620402780.jpg&quot; alt=&quot;ssssssss&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;ffffaaaaa
+&lt;img src=&quot;/assets/images//15372620402780.jpg&quot; alt=&quot;ssassssss&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/rr01.jpg&quot; alt=&quot;rr02&quot; /&gt;&lt;/p&gt;
 
@@ -93,8 +128,8 @@
 
 </description>
         <pubDate>Tue, 16 Feb 2016 14:32:24 +0800</pubDate>
-        <link>http://localhost:4000/2016/02/hello-world-vno/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/02/hello-world-vno/</guid>
+        <link>/2016/02/hello-world-vno/</link>
+        <guid isPermaLink="true">/2016/02/hello-world-vno/</guid>
         
         
       </item>
@@ -122,8 +157,8 @@ You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;
 
 </description>
         <pubDate>Mon, 15 Feb 2016 14:32:24 +0800</pubDate>
-        <link>http://localhost:4000/2016/02/sample-post/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/02/sample-post/</guid>
+        <link>/2016/02/sample-post/</link>
+        <guid isPermaLink="true">/2016/02/sample-post/</guid>
         
         
       </item>
