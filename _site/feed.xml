@@ -5,9 +5,218 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 25 Sep 2018 11:05:28 +0800</pubDate>
-    <lastBuildDate>Tue, 25 Sep 2018 11:05:28 +0800</lastBuildDate>
+    <pubDate>Tue, 25 Sep 2018 11:08:50 +0800</pubDate>
+    <lastBuildDate>Tue, 25 Sep 2018 11:08:50 +0800</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
+    
+      <item>
+        <title>测试</title>
+        <description>&lt;h1 id=&quot;assasdf&quot;&gt;assasdf&lt;/h1&gt;
+</description>
+        <pubDate>Tue, 25 Sep 2018 00:00:00 +0800</pubDate>
+        <link>/2018/09/%E6%B5%8B%E8%AF%95/</link>
+        <guid isPermaLink="true">/2018/09/%E6%B5%8B%E8%AF%95/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>切单项目小结</title>
+        <description>&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;场站交易线下交易严重。带来了如下问题
+    &lt;ol&gt;
+      &lt;li&gt;平台收益受损；&lt;/li&gt;
+      &lt;li&gt;乘客体验差;&lt;/li&gt;
+      &lt;li&gt;容易引发线下超载等安全事故&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;场站切单率.预计至少超过20%
+    &lt;ol&gt;
+      &lt;li&gt;客服随机电话回访&lt;/li&gt;
+      &lt;li&gt;场站订单司机行为分析&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;思路&quot;&gt;思路&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;根据司机历史统计行为进行建模&lt;/li&gt;
+  &lt;li&gt;司机在刷订单列表时，根据模型（司机特征、乘客特征、订单特征）预测切单概率&lt;/li&gt;
+  &lt;li&gt;对切单倾向严重的匹配做管控
+    &lt;ol&gt;
+      &lt;li&gt;最严重的直接过滤&lt;/li&gt;
+      &lt;li&gt;其他司机按照其平均成交金额做分级管控&lt;/li&gt;
+      &lt;li&gt;根据实时供需数据随时调整阈值（doing.&lt;/li&gt;
+      &lt;li&gt;从安全角度应该直接清除，从增长角度需要区分场景
+        &lt;ol&gt;
+          &lt;li&gt;运力不足：适当放松阈值，优先满足乘客乘坐，同时平台有较低概率能够拿到提成&lt;/li&gt;
+          &lt;li&gt;运力充足：适当收紧阈值，优先让平台上的优质司机(切单概率低、忠诚度高.接单&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;特征工程&quot;&gt;特征工程&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;缺失值处理（https://www.zhihu.com/question/26639110）
+    &lt;ol&gt;
+      &lt;li&gt;删除。最简单最直接的方法，很多时候也是最有效的方法，这种做法的缺点是可能会导致信息丢失。
+        &lt;ol&gt;
+          &lt;li&gt;删除有缺失数据的样本&lt;/li&gt;
+          &lt;li&gt;删除有过多缺失数据的特征&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;补全。
+        &lt;ol&gt;
+          &lt;li&gt;用规则或模型将缺失数据补全，这种做法的缺点是可能会引入噪声。平均数、中位数、众数、最大值、最小值、固定值、插值等等&lt;/li&gt;
+          &lt;li&gt;建立一个模型来“预测”缺失的数据。（KNN, Matrix completion等方法）
+            &lt;ol&gt;
+              &lt;li&gt;根本缺陷：如果其他变量与缺失变量无关，则预测结果无意义；反之如果预测结果非常准确，则说明加入这个变量无意义；&lt;/li&gt;
+              &lt;li&gt;一般情况下，介于二者之间&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;引入虚拟变量(dummy variable.来表征是否有缺失，是否有补全。&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;忽略。
+        &lt;ol&gt;
+          &lt;li&gt;有一些模型，如随机森林，自身能够处理数据缺失的情况，在这种情况下不需要对缺失数据做任何的处理，这种做法的缺点是在模型的选择上有局限。&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;把变量映射到高维空间。
+        &lt;ol&gt;
+          &lt;li&gt;好处：保留了原始数据全部信息，不用考虑缺失值、不用考虑线性不可分之类问题&lt;/li&gt;
+          &lt;li&gt;缺点：计算量太大，而且需要样本量足够大&lt;/li&gt;
+          &lt;li&gt;举例：性别有男、女、缺失三种情况，映射为三个变量：是否男、是否女、是否缺失。连续型变量也可以如此处理。&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;缺失值较多
+        &lt;ol&gt;
+          &lt;li&gt;
+            &lt;table&gt;
+              &lt;tbody&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;修改为  “XX字段有值”&lt;/td&gt;
+                  &lt;td&gt;“字段为空”&lt;/td&gt;
+                &lt;/tr&gt;
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;特征转化
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;对原始特征转化，把原来的非线性关系转化为线性关系&lt;/strong&gt;
+        &lt;ol&gt;
+          &lt;li&gt;LinearReg模型是线性模型，在非线性情况下效果不好&lt;/li&gt;
+          &lt;li&gt;复杂模型(如Svm)对于高维特征有时间约束&lt;/li&gt;
+          &lt;li&gt;CTR 预估目前最常用方法还是 LR&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;方法1:离散化
+        &lt;ol&gt;
+          &lt;li&gt;目标：转化后向量里每个元素保持比较好的线性关系&lt;/li&gt;
+          &lt;li&gt;离散化方法
+            &lt;ol&gt;
+              &lt;li&gt;等距离离散&lt;/li&gt;
+              &lt;li&gt;等样本点离散&lt;/li&gt;
+              &lt;li&gt;画图观察趋势（趋势、拐点）&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;方法2: 函数变换
+        &lt;ol&gt;
+          &lt;li&gt;通过非线性函数变换得到新的特征加入模型训练（需要对新加入特征做归一化)&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;方法3: 决策树里散发（切单采用）
+        &lt;ol&gt;
+          &lt;li&gt;决策树可以理解为一堆的 if … else …&lt;/li&gt;
+          &lt;li&gt;天生可以对连续特征进行分段&lt;/li&gt;
+          &lt;li&gt;gmail 在对信件重要性排序使用了决策树离散化方法&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;方法4: 核方法
+        &lt;ol&gt;
+          &lt;li&gt;可以理解为特征函数变换的一种方式&lt;/li&gt;
+          &lt;li&gt;把核函数看成相似度的话， 则变成 KNN 模型或者加权平均模型&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;特征工程方法论
+    &lt;ol&gt;
+      &lt;li&gt;避免简单粗暴的归一化或者标准化，往往风险大于收益&lt;/li&gt;
+      &lt;li&gt;尝试随机森林或者其他集成学习树模型暴力处理
+        &lt;ol&gt;
+          &lt;li&gt;决策树原型的模型对特征变量取值范围不敏感&lt;/li&gt;
+          &lt;li&gt;有类似良好特性的分类器还包括:
+            &lt;ol&gt;
+              &lt;li&gt;特定种类的深度网络&lt;/li&gt;
+              &lt;li&gt;L1范数正则化后的线性模型&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;移除不必要数据，降低变量维度
+ 在对特征做各种维度变化和复杂处理前，可以去掉无用和低贡献度的变量，降低后续处理难度
+        &lt;ol&gt;
+          &lt;li&gt;移除单一取值变量&lt;/li&gt;
+          &lt;li&gt;移除低方差变量
+            &lt;ol&gt;
+              &lt;li&gt;和单一取值类似，虽然取值不唯一，但整体变化很小。&lt;/li&gt;
+              &lt;li&gt;可人为设定阈值来去除该类型变量&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;转化描述变量
+在不假设分类器的前提下，必须对描述变量转化为数字类型变量，因为大部分算法无法直接处理描述变量
+        &lt;ol&gt;
+          &lt;li&gt;连续特征(continuous)
+            &lt;ol&gt;
+              &lt;li&gt;归一化（去中心、方差归一）&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;无序变量(特征)（categorical)
+            &lt;ol&gt;
+              &lt;li&gt;独热编码(one-hot、One-of-k),比如 color 取值为:
+                &lt;ol&gt;
+                  &lt;li&gt;red   (1,0,0)&lt;/li&gt;
+                  &lt;li&gt;green (0,1,0)&lt;/li&gt;
+                  &lt;li&gt;blue  (0,0,1)&lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;有序变量(特征)（ordinal)
+            &lt;ol&gt;
+              &lt;li&gt;类似one-hot,包含顺序特征,比如status取值:
+                &lt;ol&gt;
+                  &lt;li&gt;bad      (1,0,0)&lt;/li&gt;
+                  &lt;li&gt;normal   (1,1,0)&lt;/li&gt;
+                  &lt;li&gt;good     (1,1,1)&lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 24 Sep 2018 00:00:00 +0800</pubDate>
+        <link>/2018/09/%E5%88%87%E5%8D%95%E9%A1%B9%E7%9B%AE%E5%B0%8F%E7%BB%93/</link>
+        <guid isPermaLink="true">/2018/09/%E5%88%87%E5%8D%95%E9%A1%B9%E7%9B%AE%E5%B0%8F%E7%BB%93/</guid>
+        
+        
+      </item>
     
       <item>
         <title>词向量</title>
