@@ -5,14 +5,13 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 25 Nov 2018 23:41:32 +0800</pubDate>
-    <lastBuildDate>Sun, 25 Nov 2018 23:41:32 +0800</lastBuildDate>
+    <pubDate>Sun, 25 Nov 2018 23:55:33 +0800</pubDate>
+    <lastBuildDate>Sun, 25 Nov 2018 23:55:33 +0800</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
         <title>Perception</title>
-        <description>&lt;h2 id=&quot;-感知机perceptron是二类分类的线性分类模型其输入为实例的特征向量输出为实例的类别取1和-1二值&quot;&gt;* &lt;b&gt;感知机&lt;/b&gt;(perceptron)是二类分类的线性分类模型,其输入为实例的特征向量,输出为实例的类别,取+1和-1二值.&lt;/h2&gt;
-&lt;h2 id=&quot;什么是感知机perception&quot;&gt;什么是感知机(Perception)&lt;/h2&gt;
+        <description>&lt;h3 id=&quot;什么是感知机perception&quot;&gt;什么是感知机(Perception)？&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;b&gt;感知机&lt;/b&gt;(perceptron)是二类分类的线性分类模型,其输入为实例的特征向量,输出为实例的类别,取+1和-1二值.&lt;/li&gt;
   &lt;li&gt;感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于 &lt;b&gt;判别模型&lt;/b&gt;。&lt;/li&gt;
@@ -21,7 +20,7 @@
   &lt;li&gt;感知机是神经网络与支持向量机的基础。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;感知机模型&quot;&gt;感知机模型&lt;/h2&gt;
+&lt;h3 id=&quot;感知机模型&quot;&gt;感知机模型&lt;/h3&gt;
 &lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;感知机满足输入空间到输出空间的如下函数称为感知机：&lt;/p&gt;
