@@ -1,0 +1,103 @@
+<h3 id="回归">回归</h3>
+
+<ol>
+  <li>区别
+    <ol>
+      <li>
+        <p>从输出值、目的和评价指标来区分</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: center">区别</th>
+              <th style="text-align: center">回归</th>
+              <th style="text-align: center">分类</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: center">输出</td>
+              <td style="text-align: center">连续值</td>
+              <td style="text-align: center">离散数据</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">目的</td>
+              <td style="text-align: center">寻找最优拟合</td>
+              <td style="text-align: center">寻找决策边界</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">评价方法</td>
+              <td style="text-align: center">SSE(sum of square errors)、拟合优度</td>
+              <td style="text-align: center">精度、混淆矩阵</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <p>从应用场景看</p>
+        <ol>
+          <li>回归问题的应用场景<br />
+ 回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。</li>
+          <li>分类问题的应用场景
+ 分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>logistic 回归是分类
+    <ol>
+      <li>logistic回归只是用到了回归算法，但是其输出的结果是决策边界，是不连续的。</li>
+    </ol>
+  </li>
+  <li>逻辑回归5要素
+    <ol>
+      <li>假设
+        <ol>
+          <li>数据服从伯努利分布,模型可以描述为
+  <script type="math/tex">h_\theta(x;\theta) = p</script></li>
+          <li>假设正样本的概率是
+  <script type="math/tex">p = \frac{1}{(1 + e^{-\theta^{T}x})}</script> <script type="math/tex">h_\theta(x;\theta) = \frac{1}{(1 + e^{-\theta^{T}x})}</script></li>
+        </ol>
+      </li>
+      <li>损失函数
+        <ol>
+          <li>极大似然函数
+ <script type="math/tex">\prod_{1}^{m}h_{\theta}(x^i;\theta)^yi * (1 - h_\theta(x^i;\theta))^{1-y^i}</script></li>
+        </ol>
+      </li>
+      <li>求解方法
+        <ol>
+          <li>梯度下降求解参数
+            <ol>
+              <li>批量梯度下降 batch gd</li>
+              <li>随机梯度下降 sgd</li>
+              <li>小批量梯度下降</li>
+            </ol>
+          </li>
+          <li>学习率选择
+            <ol>
+              <li>先大后小</li>
+              <li>更新频繁的参数
+                <ol>
+                  <li>选择较小学习率</li>
+                  <li>否则，选择较大学习率</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>目的
+        <ol>
+          <li>数据二分类</li>
+          <li>提高准确率</li>
+        </ol>
+      </li>
+      <li>如何分类
+        <ol>
+          <li>选定分类阈值</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>

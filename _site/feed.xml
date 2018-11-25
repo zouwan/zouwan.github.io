@@ -5,17 +5,353 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 25 Sep 2018 11:17:27 +0800</pubDate>
-    <lastBuildDate>Tue, 25 Sep 2018 11:17:27 +0800</lastBuildDate>
+    <pubDate>Sun, 25 Nov 2018 23:40:57 +0800</pubDate>
+    <lastBuildDate>Sun, 25 Nov 2018 23:40:57 +0800</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
-        <title>测试</title>
-        <description>&lt;h1 id=&quot;assasdf&quot;&gt;assasdf&lt;/h1&gt;
+        <title>Perception</title>
+        <description>&lt;h2 id=&quot;-感知机perceptron是二类分类的线性分类模型其输入为实例的特征向量输出为实例的类别取1和-1二值&quot;&gt;* &lt;b&gt;感知机&lt;/b&gt;(perceptron)是二类分类的线性分类模型,其输入为实例的特征向量,输出为实例的类别,取+1和-1二值.&lt;/h2&gt;
+&lt;h2 id=&quot;什么是感知机perception&quot;&gt;什么是感知机(Perception)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;感知机&lt;/b&gt;(perceptron)是二类分类的线性分类模型,其输入为实例的特征向量,输出为实例的类别,取+1和-1二值.&lt;/li&gt;
+  &lt;li&gt;感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于 &lt;b&gt;判别模型&lt;/b&gt;。&lt;/li&gt;
+  &lt;li&gt;感知机学习旨在求出将训练数据进行线性划分的分离超平面，为此导入了基于误分类的损失函数，利用梯度下降法对损失函数进行极小化，求得感知机模型。&lt;/li&gt;
+  &lt;li&gt;感知机学习算法具有简单而易于实现的优点，分为原始形式和对偶形式。&lt;/li&gt;
+  &lt;li&gt;感知机是神经网络与支持向量机的基础。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;感知机模型&quot;&gt;感知机模型&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;感知机满足输入空间到输出空间的如下函数称为感知机：&lt;/p&gt;
+
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;f(x)=sign(wx+b)&lt;/script&gt;
+
+    &lt;p&gt;其中 w 称为权值(weight，b 称为偏置(bias), sign为激活函数&lt;/p&gt;
+
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+sign(x)=\begin{cases} +1,x&gt;0 \\ -1,x&lt;0 \\ \end{cases} %]]&gt;&lt;/script&gt;
+
+    &lt;p&gt;sign(x) 将大于0的分为1， 小于0的分为-1.&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;感知机相比逻辑回归主要区别是 &lt;b&gt;激活函数不同&lt;/b&gt;
+ 感知机激活函数是 sign(x),又称单位阶跃函数
+ 逻辑回归（logistic regression)激活函数是 sigmoid
+ sigmoid一般取阈值0.5， 大于0.5的分为1， 小于0.1的分为0
+ 逻辑回归也被看做是一种概率估计， 详见逻辑回归(todo)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;感知机原理
+        &lt;ol&gt;
+          &lt;li&gt;给每一个属性一个权重，对属性和权重乘积求和得到的结果和一个阈值进行比较，可以输出一个二分类结果。比如判定是否能够给张三放贷
+&lt;br /&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;感知机的几何解释:
+        &lt;ol&gt;
+          &lt;li&gt;感知机可以用线性方程表示；
+ &lt;script type=&quot;math/tex&quot;&gt;w \cdot x+b=0&lt;/script&gt;&lt;/li&gt;
+          &lt;li&gt;几何意义如下图:
+ &lt;img src=&quot;https://pic2.zhimg.com/80/v2-7bd3d267a3d50a511b4b51aace348301_hd.png&quot; alt=&quot;image&quot; /&gt;&lt;/li&gt;
+          &lt;li&gt;啥？超平面 （黑脸问号)
+            &lt;ol&gt;
+              &lt;li&gt;超平面在二维空间里就是直线，方程是a&lt;em&gt;x+b&lt;/em&gt;y+c=0&lt;/li&gt;
+              &lt;li&gt;超平面在三维空间里就是平面，方程是a&lt;em&gt;x+b&lt;/em&gt;y+c*z+d=0&lt;/li&gt;
+              &lt;li&gt;在n维空间里推广就是就是a&lt;em&gt;x+b&lt;/em&gt;y+c*z+……..+k=0
+(a,b,c…)对应向量w, 是由平面确定的数，
+   （x,y,z..)是平面上任一点的坐标，对应方程的向量x
+&lt;br /&gt;&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;对应于特征空间Rn中的一个超平面S，其中w是超平面的法向量，b是超平面的截距。这个超平面将特征空间划分为两个部分，位于两部分的点分别被分为正、负两类。因此，超平面S称为分离超平面（separating hyperplanes）
+ &lt;br /&gt; 假定 $wx+b=0$是一个超平面，令$g(x)=wx+b$,即超平面上的所有点都满足$g(x)=0$. 对于超平面的一侧点满足 $g(x)&amp;gt;0$, 另一侧满足 $g(x)&amp;lt;0$.
+ &lt;br /&gt;&lt;/li&gt;
+      &lt;li&gt;对于不在超平面上的点x到超平面的举例是 &lt;b&gt; $ r=\frac {g(x)}{\left|w \right|}$&lt;/b&gt;
+  &lt;br /&gt; 证明：见下图，其中 O 为原点， $X_p$为超平面上的点， X 是超平面外的点， w 为超平面法向量
+  &lt;br /&gt;&lt;img src=&quot;https://img-blog.csdn.net/20171015173343056?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSmFzdGVyX3dpc2RvbQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;image&quot; /&gt;
+  &lt;br /&gt; (1) $X=X_p+r * \frac{w}{ \left|w\right|}$
+        &lt;blockquote&gt;
+          &lt;p&gt;向量基本运算法则：$ OX = OX_p + X_pX$; w为法向量，所以 $\frac{w}{\left|w\right|}$ 是垂直于超平面的单位向量&lt;/p&gt;
+        &lt;/blockquote&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;(2) $g(x) = w^T(x_p+r\frac{w}{\left|w\right|})+w_0 = (w^T * x_p + w_0) + r * \frac{w^T * w}{\left|w\right|} = r * \left| w \right|$&lt;/p&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;等式（1）带入等式 $g(x)=wx+b$, 由于$X_p$在超平面， 所以 $g(X_p) = w^T * x_p + w_0 = 0$&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;结论一得证&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;ol&gt;
+  &lt;li&gt;感知机学习目标
+ &lt;br /&gt;学习参数w与b，确定了w与b，图上的直线（高维空间下为超平面）也就确定了
+    &lt;ol&gt;
+      &lt;li&gt;找到损失函数,转化为最优化问题
+        &lt;ol&gt;
+          &lt;li&gt;误分类点数目
+            &lt;ol&gt;
+              &lt;li&gt;无法函数化表示&lt;/li&gt;
+              &lt;li&gt;w, b 不是连续可导&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;误分类点距离超平面距离，总距离越小越好
+ &lt;script type=&quot;math/tex&quot;&gt;\frac{1}{\| w\|} | w \cdot x_0 + b |&lt;/script&gt;
+            &lt;ol&gt;
+              &lt;li&gt;当数据点被误分类(+1吧被误判为-1), 则 $(w \cdot x_0 + b) &amp;lt; 0 $, 此时预测值 $y_i$=+1, 满足 $-y_i(w \cdot x_0 + b) &amp;gt; 0$&lt;/li&gt;
+              &lt;li&gt;当数据点被误分类(-1吧被误判为+1), 则 $(w \cdot x_0 + b) &amp;gt; 0 $, 此时预测值 $y_i$=-1, 满足 $y_i(w \cdot x_0 + b) &amp;gt; 0 $&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;损失函数
+            &lt;ol&gt;
+              &lt;li&gt;上式不考虑$|w|$, 去掉后面的绝对值，得到损失函数:
+ &lt;script type=&quot;math/tex&quot;&gt;L(w,b) = -\sum_{x_i\in M}{y_i(w \cdot x_i + b)}&lt;/script&gt;
+ 其中M 为误分类点数目&lt;/li&gt;
+              &lt;li&gt;感知机不关心实际超平面距离每个点的距离（定量，误分类点的距离），只关心最终分类是否正确（定性，误分类点的个数）&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;损失函数推导：
+   &lt;br /&gt; &lt;script type=&quot;math/tex&quot;&gt;w*x_i+b&gt;0时， y_i=-1&lt;/script&gt;即把正例预测为负例 或
+   &lt;br /&gt; &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+w*x_i+b&lt;0时， y_i=1 %]]&gt;&lt;/script&gt;j即把负例预测为正例
+   &lt;br /&gt; 可以得到误分类点到超平面总的距离是
+   &lt;br /&gt;
+   &lt;br /&gt;&lt;script type=&quot;math/tex&quot;&gt;-\frac{1}{\left\|w\right\|}\sum_{x_i \in M}{y_i*(w*x_i+b)}&lt;/script&gt;
+  &lt;br /&gt; &lt;script type=&quot;math/tex&quot;&gt;-\sum_{x_i \in M}{y_i*(w*x_i+b)}&lt;/script&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;更新策略（梯度下降）
+        &lt;ol&gt;
+          &lt;li&gt;对损失函数计算梯度（梯度下降）
+  &lt;br /&gt;&lt;br /&gt;&lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} \nabla_{w}{L(w,b)} = -\sum_{x \in M}{y_i * x_i} \\ \nabla_{b}{L(w,b)} = -\sum_{x \in M}{y_i} \end{array} \right.&lt;/script&gt;&lt;br /&gt;
+  这里使用随机梯度（随机选取误分类点$(x_i, y_i)$对 w, b 进行更新， 更新公式如下：
+  &lt;br /&gt;&lt;br /&gt;&lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y_i  \end{array} \right.&lt;/script&gt;&lt;br /&gt;&lt;/li&gt;
+          &lt;li&gt;如何理解上面更新公式？(from &lt;a href=&quot;https://www.zhihu.com/question/57747902&quot;&gt;知乎&lt;/a&gt;)
+            &lt;ol&gt;
+              &lt;li&gt;梯度更新公式确实不是推导而是创造出来的，所以只能从概念上去理解&lt;/li&gt;
+              &lt;li&gt;设想下有个函数，你的目标是：找到一个参数$\theta$ 使得它的值$Y$最小。但它很复杂，你无法找到这个参数的解析解，所以你希望通过梯度下降法去猜这个参数&lt;/li&gt;
+              &lt;li&gt;问题是怎么猜？
+ &lt;br /&gt;对于多数有连续性的函数来说，显然不可能把每个$\theta$都试一遍。所以只能先随机取一个$\theta$，然后看看怎么调整它最有可能使得$\theta$变小。
+ &lt;br /&gt;把这个过程重复n遍，自然最后得到的$\theta$的估值会越来越小。
+ &lt;br /&gt;现在问题是怎么调整？既然要调整，肯定是基于当前我们拥有的那个参数$\theta$，所以有了：那现在问题是每次更新的时候这个$\theta$应该取什么值？
+ &lt;br /&gt;我们知道关于某变量的（偏）导数的概念是指当（仅仅）该变量往 &lt;b&gt;正向&lt;/b&gt; 的变化量趋向于0时的其函数值变化量的极限。 所以现在若求$\theta$关于的导数，得到一个值比如:5,那就说明若现在我们把$\theta$往正向（即增大）一点点，$\theta$的值会变大，但不一定是正好+5。同理若现在导数是-5，那么把$\theta$增大一点点$Y$值会变小。&lt;br /&gt;
+ &lt;br /&gt;这里我们发现不管导数值$\theta$是正的还是负的（正负即导数的方向），对于$Y$来说，$-\theta$的最终方向（即最终的正负号，决定是增（+）还是减（-））一定是能将Y值变小的方向（除非导数为0）。所以有了:
+ &lt;script type=&quot;math/tex&quot;&gt;\theta_{t+1}=\theta_t + (-\Delta)&lt;/script&gt;但是说到底，$\Delta$的绝对值只是个关于Y的变化率，本质上和$\theta_t$没关系。所以为了抹去$\Delta$在幅度上对$\theta_t$的影响，需要一个学习率来控制：$\alpha$。所以有了：$\alpha \in \left(0,1\right]$
+ &lt;script type=&quot;math/tex&quot;&gt;\theta_{t+1}=\theta_t + (-\alpha \Delta) =\theta_t -\alpha \Delta&lt;/script&gt;就是有多少个参数，就有多少个不同的$\Delta$。
+ &lt;br /&gt;现在分析在梯度下降法中最常听到的一句话：“梯度下降法就是朝着梯度的反方向迭代地调整参数直到收敛。”   这里的梯度就是 $\Delta$ ,而梯度的反方向就是 $-\Delta$ 的符号方向—梯度实际上是个向量。所以这个角度来说，即使我们只有一个参数需要调整，也可以认为它是个一维的向量。 
+ &amp;lt;br&lt;b&gt;整个过程你可以想象自己站在一个山坡上，准备走到山脚下（最小值的地方），于是很自然地你会考虑朝着哪个方向走，方向由$\Delta$的方向给出，而至于一次走多远，由$|\alpha\Delta|$来控制。这种方式相信你应该能理解其只能找到局部最小值，而不是全局的。&lt;/b&gt;&lt;/li&gt;
+              &lt;li&gt;换个角度看，想象损失函数是$y=x^2$的抛物线形式
+                &lt;ol&gt;
+                  &lt;li&gt;纵坐标表示损失函数大小，横坐标表示参数 $\theta$&lt;/li&gt;
+                  &lt;li&gt;$\theta$在最低点左边时，导数小于0，只有$\theta$往右边（最低点方向）走，损失函数才会变小，即$\theta$要往导数的负方向变化&lt;/li&gt;
+                  &lt;li&gt;$\theta$在最低点右边时，导数大于0，只有$\theta$往左边（最低点方向）走，损失函数才会变小，即$\theta$要往导数的负方向变化&lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;更新方法
+ &lt;br /&gt;对于感知机模型 $f(x)=sign(w*x+b)$
+            &lt;ol&gt;
+              &lt;li&gt;选取初值 $w_0, b_0$&lt;/li&gt;
+              &lt;li&gt;在训练集选择数据 $(x_i, y_i)$&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 </description>
-        <pubDate>Tue, 25 Sep 2018 00:00:00 +0800</pubDate>
-        <link>/2018/09/%E6%B5%8B%E8%AF%95/</link>
-        <guid isPermaLink="true">/2018/09/%E6%B5%8B%E8%AF%95/</guid>
+        <pubDate>Sun, 25 Nov 2018 00:00:00 +0800</pubDate>
+        <link>/2018/11/perception/</link>
+        <guid isPermaLink="true">/2018/11/perception/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>回归和分类</title>
+        <description>&lt;h3 id=&quot;回归&quot;&gt;回归&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;区别
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;从输出值、目的和评价指标来区分&lt;/p&gt;
+
+        &lt;table&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th style=&quot;text-align: center&quot;&gt;区别&lt;/th&gt;
+              &lt;th style=&quot;text-align: center&quot;&gt;回归&lt;/th&gt;
+              &lt;th style=&quot;text-align: center&quot;&gt;分类&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: center&quot;&gt;输出&lt;/td&gt;
+              &lt;td style=&quot;text-align: center&quot;&gt;连续值&lt;/td&gt;
+              &lt;td style=&quot;text-align: center&quot;&gt;离散数据&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: center&quot;&gt;目的&lt;/td&gt;
+              &lt;td style=&quot;text-align: center&quot;&gt;寻找最优拟合&lt;/td&gt;
+              &lt;td style=&quot;text-align: center&quot;&gt;寻找决策边界&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td style=&quot;text-align: center&quot;&gt;评价方法&lt;/td&gt;
+              &lt;td style=&quot;text-align: center&quot;&gt;SSE(sum of square errors)、拟合优度&lt;/td&gt;
+              &lt;td style=&quot;text-align: center&quot;&gt;精度、混淆矩阵&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;从应用场景看&lt;/p&gt;
+        &lt;ol&gt;
+          &lt;li&gt;回归问题的应用场景&lt;br /&gt;
+ 回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。&lt;/li&gt;
+          &lt;li&gt;分类问题的应用场景
+ 分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;logistic 回归是分类
+    &lt;ol&gt;
+      &lt;li&gt;logistic回归只是用到了回归算法，但是其输出的结果是决策边界，是不连续的。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;逻辑回归5要素
+    &lt;ol&gt;
+      &lt;li&gt;假设
+        &lt;ol&gt;
+          &lt;li&gt;数据服从伯努利分布,模型可以描述为
+  &lt;script type=&quot;math/tex&quot;&gt;h_\theta(x;\theta) = p&lt;/script&gt;&lt;/li&gt;
+          &lt;li&gt;假设正样本的概率是
+  &lt;script type=&quot;math/tex&quot;&gt;p = \frac{1}{(1 + e^{-\theta^{T}x})}&lt;/script&gt; &lt;script type=&quot;math/tex&quot;&gt;h_\theta(x;\theta) = \frac{1}{(1 + e^{-\theta^{T}x})}&lt;/script&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;损失函数
+        &lt;ol&gt;
+          &lt;li&gt;极大似然函数
+ &lt;script type=&quot;math/tex&quot;&gt;\prod_{1}^{m}h_{\theta}(x^i;\theta)^yi * (1 - h_\theta(x^i;\theta))^{1-y^i}&lt;/script&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;求解方法
+        &lt;ol&gt;
+          &lt;li&gt;梯度下降求解参数
+            &lt;ol&gt;
+              &lt;li&gt;批量梯度下降 batch gd&lt;/li&gt;
+              &lt;li&gt;随机梯度下降 sgd&lt;/li&gt;
+              &lt;li&gt;小批量梯度下降&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;学习率选择
+            &lt;ol&gt;
+              &lt;li&gt;先大后小&lt;/li&gt;
+              &lt;li&gt;更新频繁的参数
+                &lt;ol&gt;
+                  &lt;li&gt;选择较小学习率&lt;/li&gt;
+                  &lt;li&gt;否则，选择较大学习率&lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;目的
+        &lt;ol&gt;
+          &lt;li&gt;数据二分类&lt;/li&gt;
+          &lt;li&gt;提高准确率&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;如何分类
+        &lt;ol&gt;
+          &lt;li&gt;选定分类阈值&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 28 Sep 2018 00:00:00 +0800</pubDate>
+        <link>/2018/09/%E5%9B%9E%E5%BD%92%E5%92%8C%E5%88%86%E7%B1%BB/</link>
+        <guid isPermaLink="true">/2018/09/%E5%9B%9E%E5%BD%92%E5%92%8C%E5%88%86%E7%B1%BB/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>基数估计算法</title>
+        <description>&lt;p&gt;转自淘宝张洋的基数估计算法概览&lt;/p&gt;
+
+&lt;h3 id=&quot;基数估计算法定义&quot;&gt;基数估计算法定义&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;基数是指一个集合中，不同的数的个数；基数统计是集合不同的数的个数
+    &lt;ul&gt;
+      &lt;li&gt;比如一个集合｛0, 1, 2, 2, 4, 5}，其基数是5&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;基数估计是估计一个集合中不同数的个数
+    &lt;ul&gt;
+      &lt;li&gt;用概率算法的思想，来用低空间和时间成本，以一个很低的误差度来估计数据的基数&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;原理&quot;&gt;原理&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;一个简单直观的基数估计方法
+  假设你通过如下步骤生成了一个数据集：
+    &lt;ol&gt;
+      &lt;li&gt;随机生成n个服从均匀分布的数字&lt;/li&gt;
+      &lt;li&gt;随便重复其中一些数字，重复的数字和重复次数都不确定&lt;/li&gt;
+      &lt;li&gt;打乱这些数字的顺序，得到一个数据集&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;问题：如何估计这个数据集中有多少不同的数字？&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;找出数据集中最小的数字&lt;/li&gt;
+      &lt;li&gt;假如m是数值上限，x是找到的最小的数，则m/x是基数的一个估计&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;例如，我们扫描一个包含0到1之间数字组成的数据集，其中最小的数是0.01，则一个比较合理的推断是数据集中大约有100个不同的元素，否则我们应该预期能找到一个更小的数。注意这个估计值和重复次数无关：就如最小值重复多少次都不改变最小值的数值&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;改进方案
+  上面的简单基数估计存在精度不足的问题&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;优势&quot;&gt;优势&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;基数估计算法使用很少的资源给出数据集基数的一个良好估计&lt;/li&gt;
+  &lt;li&gt;这个方法和数据本身的特征无关，而且可以高效的进行分布式并行计算&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;应用场景&quot;&gt;应用场景&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;应用场景
+    &lt;ul&gt;
+      &lt;li&gt;流量监控（多少不同IP访问过一个服务器）&lt;/li&gt;
+      &lt;li&gt;数据库查询优化（例如我们是否需要排序和合并，或者是否需要构建哈希表）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;
+&lt;p&gt;http://blog.codinglabs.org/articles/cardinality-estimation.html
+https://www.jianshu.com/p/a966e7d71666&lt;/p&gt;
+</description>
+        <pubDate>Thu, 27 Sep 2018 00:00:00 +0800</pubDate>
+        <link>/2018/09/%E5%9F%BA%E6%95%B0%E4%BC%B0%E8%AE%A1%E7%AE%97%E6%B3%95/</link>
+        <guid isPermaLink="true">/2018/09/%E5%9F%BA%E6%95%B0%E4%BC%B0%E8%AE%A1%E7%AE%97%E6%B3%95/</guid>
         
         
       </item>
@@ -60,6 +396,68 @@
 
 &lt;h3 id=&quot;特征工程&quot;&gt;特征工程&lt;/h3&gt;
 &lt;ol&gt;
+  &lt;li&gt;数据清洗
+    &lt;ol&gt;
+      &lt;li&gt;数据质量
+        &lt;ol&gt;
+          &lt;li&gt;数据完整性–例如人的属性缺少性别、籍贯、年龄等
+            &lt;ol&gt;
+              &lt;li&gt;数据补全（剔除）&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;数据唯一性–不同来源数据出现重复情况
+            &lt;ol&gt;
+              &lt;li&gt;去除重复记录&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;数据权威性–同一个指标出现多个来源的数据，且数值不一样
+            &lt;ol&gt;
+              &lt;li&gt;选用最权威渠道数据&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;数据合法性–获取的数据与尝试不符，如年龄大于200岁
+            &lt;ol&gt;
+              &lt;li&gt;设定判定规则（或者半人工处理）&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;数据一致性–不同来源的不同指标，实际内涵是一样的（或统一指标内涵不一致）
+            &lt;ol&gt;
+              &lt;li&gt;建立数据体系&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;数据更适合挖掘
+        &lt;ol&gt;
+          &lt;li&gt;高纬度
+            &lt;ol&gt;
+              &lt;li&gt;降维（主成分分析、随机森林）&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;维度低
+            &lt;ol&gt;
+              &lt;li&gt;抽象
+                &lt;ol&gt;
+                  &lt;li&gt;汇总（平均、加总、最大、最小）&lt;/li&gt;
+                  &lt;li&gt;离散化、聚类、自定义分组&lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;无关信息和字段冗余
+            &lt;ol&gt;
+              &lt;li&gt;剔除&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;多指标数值、单位不同
+            &lt;ol&gt;
+              &lt;li&gt;归一化（最小-最大、零-均值、小数定标）&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
   &lt;li&gt;缺失值处理（https://www.zhihu.com/question/26639110）
     &lt;ol&gt;
       &lt;li&gt;删除。最简单最直接的方法，很多时候也是最有效的方法，这种做法的缺点是可能会导致信息丢失。
@@ -323,113 +721,6 @@
         <pubDate>Tue, 18 Sep 2018 00:00:00 +0800</pubDate>
         <link>/2018/09/ElasticSearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
         <guid isPermaLink="true">/2018/09/ElasticSearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Hello World - Vno</title>
-        <description>&lt;h4 id=&quot;whats-this&quot;&gt;What’s this&lt;/h4&gt;
-
-&lt;p&gt;ffffaaaaa
-&lt;img src=&quot;/assets/images//15372620402780.jpg&quot; alt=&quot;ssassssss&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/rr01.jpg&quot; alt=&quot;rr02&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/rr01.jpg&quot; alt=&quot;test&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/rr01.jpg&quot; alt=&quot;aaa&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/onevcat/vno-jekyll&quot;&gt;Vno Jekyll&lt;/a&gt; is a theme for &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt;. It is a port of my Ghost theme &lt;a href=&quot;https://github.com/onevcat/vno&quot;&gt;vno&lt;/a&gt;, which is originally developed from &lt;a href=&quot;https://github.com/daleanthony/uno&quot;&gt;Dale Anthony’s Uno&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;usage&quot;&gt;Usage&lt;/h4&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/onevcat/vno-jekyll.git your_site
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;your_site
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundler &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundler &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Your site with &lt;code class=&quot;highlighter-rouge&quot;&gt;Vno Jekyll&lt;/code&gt; enabled should be accessible in http://127.0.0.1:4000.&lt;/p&gt;
-
-&lt;p&gt;For more information about Jekyll, please visit &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll’s site&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;configuration&quot;&gt;Configuration&lt;/h4&gt;
-
-&lt;p&gt;All configuration could be done in &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;. Remember you need to restart to serve the page when after changing the config file. Everything in the config file should be self-explanatory.&lt;/p&gt;
-
-&lt;h4 id=&quot;background-image-and-avatar&quot;&gt;Background image and avatar&lt;/h4&gt;
-
-&lt;p&gt;You could replace the background and avatar image in &lt;code class=&quot;highlighter-rouge&quot;&gt;assets/images&lt;/code&gt; folder to change them.&lt;/p&gt;
-
-&lt;h4 id=&quot;sites-using-vno&quot;&gt;Sites using Vno&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;My blog&lt;/a&gt; is using &lt;code class=&quot;highlighter-rouge&quot;&gt;Vno Jekyll&lt;/code&gt; as well, you could see how it works in real. There are some other sites using the same theme. You can find them below:&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Site Name&lt;/th&gt;
-      &lt;th&gt;URL&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;OneV’s Den&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;July Tang&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://blog.julytang.xyz&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Harry Lee&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://qiuqi.li&quot;&gt;http://qiuqi.li&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;If you happen to be using this theme, welcome to &lt;a href=&quot;https://github.com/onevcat/vno-jekyll/pulls&quot;&gt;send me a pull request&lt;/a&gt; to add your site link here. :)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;license&quot;&gt;License&lt;/h4&gt;
-
-&lt;p&gt;Great thanks to &lt;a href=&quot;https://github.com/daleanthony&quot;&gt;Dale Anthony&lt;/a&gt; and his &lt;a href=&quot;https://github.com/daleanthony/uno&quot;&gt;Uno&lt;/a&gt;. Vno Jekyll is based on Uno, and contains a lot of modification on page layout, animation, font and some more things I can not remember. Vno Jekyll is followed with Uno and be licensed as &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot;&gt;Creative Commons Attribution 4.0 International&lt;/a&gt;. See the link for more information.&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 16 Feb 2016 14:32:24 +0800</pubDate>
-        <link>/2016/02/hello-world-vno/</link>
-        <guid isPermaLink="true">/2016/02/hello-world-vno/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Sample Post</title>
-        <description>&lt;p&gt;aaaaaaaaaaaaaaaaaaa
-bbbbbbbbbbbbbbbbbbb
-cccccccccccccccccccd
-aaaaaaaaf
-xxxxxxxxxxxxxxxxxx
-You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
-
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
-
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 15 Feb 2016 14:32:24 +0800</pubDate>
-        <link>/2016/02/sample-post/</link>
-        <guid isPermaLink="true">/2016/02/sample-post/</guid>
         
         
       </item>
