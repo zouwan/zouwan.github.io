@@ -92,7 +92,7 @@
   <br><br>$$\left\{ \begin{array}{lr} \nabla_{w}{L(w,b)} = -\sum_{x \in M}{y_i * x_i} \\ \nabla_{b}{L(w,b)} = -\sum_{x \in M}{y_i} \end{array} \right. $$<br>
   这里使用随机梯度（随机选取误分类点$(x_i, y_i)$对 w, b 进行更新， 更新公式如下：
   <br><br>$$\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y_i  \end{array} \right. $$<br>
-        2. 如何理解上面更新公式？(from [知乎](https://www.zhihu.com/question/57747902))
+        2. 如何理解上面更新公式？(from 知乎(https://www.zhihu.com/question/57747902))
             1. 梯度更新公式确实不是推导而是创造出来的，所以只能从概念上去理解
             2. 设想下有个函数，你的目标是：找到一个参数$\theta$ 使得它的值$Y$最小。但它很复杂，你无法找到这个参数的解析解，所以你希望通过梯度下降法去猜这个参数
             3. 问题是怎么猜？
