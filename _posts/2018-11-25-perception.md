@@ -175,7 +175,7 @@ $$\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y
                 w=[1 1] b= 第11 次更新时得到解
         1. 代码
         
-             ```c
+             ```python
                 #李航《统计学方法》p29 例2.1
                 #正例：x1=(3,3), x2=(4,3),
                 #负例：x3=(1,1)
