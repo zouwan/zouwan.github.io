@@ -49,4 +49,6 @@ ga:
     # host: your_host
 
 markdown: kramdown
+kramdown:
+  input: GFM
 markdown_ext: "md,markdown,mkd"
