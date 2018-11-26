@@ -176,7 +176,7 @@ $$\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y
         1. 代码
            李航《统计学方法》p29 例2.1, 正例：x1=(3,3), x2=(4,3),负例：x3=(1,1)
                 
-             ```python
+             ```
                 import numpy as np
                 import matplotlib.pyplot as plt
                 # x取值，样本数据，对应的是一个二维向量

@@ -5,8 +5,8 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 26 Nov 2018 20:58:56 +0800</pubDate>
-    <lastBuildDate>Mon, 26 Nov 2018 20:58:56 +0800</lastBuildDate>
+    <pubDate>Mon, 26 Nov 2018 20:59:42 +0800</pubDate>
+    <lastBuildDate>Mon, 26 Nov 2018 20:59:42 +0800</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -262,7 +262,7 @@ sign(x)=\begin{cases} +1,x&gt;0 \\ -1,x&lt;0 \\ \end{cases} %]]&gt;&lt;/script&g
             &lt;p&gt;代码
 李航《统计学方法》p29 例2.1, 正例：x1=(3,3), x2=(4,3),负例：x3=(1,1)&lt;/p&gt;
 
-            &lt;p&gt;```python
+            &lt;p&gt;```
      import numpy as np
      import matplotlib.pyplot as plt
      # x取值，样本数据，对应的是一个二维向量
