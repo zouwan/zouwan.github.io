@@ -5,13 +5,13 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 26 Nov 2018 14:59:09 +0800</pubDate>
-    <lastBuildDate>Mon, 26 Nov 2018 14:59:09 +0800</lastBuildDate>
+    <pubDate>Mon, 26 Nov 2018 14:59:39 +0800</pubDate>
+    <lastBuildDate>Mon, 26 Nov 2018 14:59:39 +0800</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
         <title>梯度下降法</title>
-        <description>&lt;p&gt;#&lt;/p&gt;
+        <description>&lt;h2 id=&quot;梯度下降法&quot;&gt;梯度下降法&lt;/h2&gt;
 </description>
         <pubDate>Mon, 26 Nov 2018 00:00:00 +0800</pubDate>
         <link>/2018/11/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/</link>
