@@ -188,7 +188,7 @@ sign(x)=\begin{cases} +1,x>0 \\ -1,x<0 \\ \end{cases} %]]></script>
         </ol>
       </li>
       <li>假定 $wx+b=0$是一个超平面，令$g(x)=wx+b$,即超平面上的所有点都满足$g(x)=0$. 对于超平面的一侧点满足 $g(x)&gt;0$, 另一侧满足 $g(x)&lt;0$.</li>
-      <li>对于不在超平面上的点x到超平面的距离是 $ r=\frac {g(x)}{\left|w \right|}$
+      <li>对于不在超平面上的点x到超平面的距离是 $ r=\frac {g(x)}{\left|w \right|}, w为L2范数$
  证明：见下图，其中 O 为原点， $X_p$为超平面上的点， X 是超平面外的点， w 为超平面法向量
 <img src="https://img-blog.csdn.net/20171015173343056?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSmFzdGVyX3dpc2RvbQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="image" /></li>
     </ol>
@@ -236,12 +236,15 @@ sign(x)=\begin{cases} +1,x>0 \\ -1,x<0 \\ \end{cases} %]]></script>
       </li>
     </ol>
   </li>
-  <li>
-    <p>损失函数推导：
-把正例预测为负例： $w<em>x_i+b&gt;0时， y_i=-1$
-把负例预测为正例： $w</em>x_i+b&lt;0时， y_i=1$
-可以得到误分类点到超平面总的距离是（注意， 只考虑不在超平面的点）
-<script type="math/tex">-\frac{1}{\left\|w\right\|}\sum_{x_i \in M}{y_i*(w*x_i+b)}</script> <script type="math/tex">-\sum_{x_i \in M}{y_i*(w*x_i+b)}</script></p>
+  <li>损失函数推导：
+    <ol>
+      <li>把正例预测为负例： $w*x_i+b&gt;0时， y_i=-1$</li>
+      <li>把负例预测为正例： $w*x_i+b&lt;0时， y_i=1$</li>
+      <li>可以得到误分类点到超平面总的距离是（注意， 只考虑不在超平面的点）
+ <script type="math/tex">-\frac{1}{\left\|w\right\|}\sum_{x_i \in M}{y_i*(w*x_i+b)}</script> 
+ 其中$\left|w\right|$可以忽略（原因1：$frac{1}{\left|w\right|}$ 不影响正负的判断，即不影响学习算法的中间过程我们；原因2：感知机训练终止条件是所有样本正确分类, 即不存在误分类点，因此$frac{1}{\left|w\right|}$ 对最终结果无影响），得到损失函数：
+ <script type="math/tex">-\sum_{x_i \in M}{y_i*(w*x_i+b)}</script></li>
+    </ol>
   </li>
   <li>更新策略（梯度下降）
     <ol>
@@ -256,7 +259,7 @@ sign(x)=\begin{cases} +1,x>0 \\ -1,x<0 \\ \end{cases} %]]></script>
           <li>问题是怎么猜？
  对于多数有连续性的函数来说，显然不可能把每个$\theta$都试一遍。所以只能先随机取一个$\theta$，然后看看怎么调整它最有可能使得$\theta$变小。
  把这个过程重复n遍，自然最后得到的损失函数L的估值会越来越小</li>
-          <li>调整策略（参考文章:[梯度下降法]）
+          <li>调整策略（参考文章:<a href="https://zouwan.github.io/2018/11/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/">梯度下降法</a>）
  基于当前我们拥有的那个参数$\theta$，所以有了：<script type="math/tex">\theta_{t+1}=\theta_t + \Delta</script>那现在问题是每次更新的时候这个$\theta$应该取什么值？
  我们知道关于某变量的（偏）导数的概念是指当（仅仅）该变量往 <b>正向</b> 的变化量趋向于0时的其函数值变化量的极限。若求Y关于$\theta_t$的导数，得到一个值比如+5, 那就说明若现在我们把$\theta_t$往负向移动，损失函数 $J(w,b）$的值会变小，但不一定是正好-5。同理若现在导数是-5，那么把$\theta$往 <b>负向</b>移动，损失函数$J(w,b)$值会变小。<br />
  不管导数值$\theta$是正的还是负的(正负即导数的方向), 对于$J(w,b)$来说，$-\theta$的最终方向（即最终的正负号，决定是增(+)还是减(-))一定是能将$J(w,b)$值变小的方向（除非导数为0）。所以有了:
@@ -274,7 +277,7 @@ sign(x)=\begin{cases} +1,x>0 \\ -1,x<0 \\ \end{cases} %]]></script>
               </li>
               <li>$\theta$在最低点右边时，导数大于0，只有$\theta$往左边（最低点方向）走，损失函数才会变小，即$\theta$要往导数的负方向变化
  1.当 x=+2; y=+4, 此时往正向损失函数$y$增大，往负向走损失函数$y$减少          <br />
- <img src="/assets/images//15432151219295.jpg" alt="-w450" />}}</li>
+ <img src="/assets/images//15432151219295.jpg" alt="-w450" /></li>
             </ol>
           </li>
         </ol>
@@ -283,12 +286,148 @@ sign(x)=\begin{cases} +1,x>0 \\ -1,x<0 \\ \end{cases} %]]></script>
  <br />对于感知机模型 $f(x)=sign(w*x+b)$
         <ol>
           <li>选取初值 $w_0, b_0$</li>
-          <li>在训练集选择数据 $(x_i, y_i)$</li>
+          <li>在训练集选择数据 $(x_i, y_i)$
+            <ol>
+              <li>任意抽取数据点，当所有数据点没有误分类时结束算法，否则进入3.</li>
+            </ol>
+          </li>
+          <li>此时有 $y_i(w<em>x_i+b)&lt;0$ ， 更新参数:
+ $\left{ \begin{array}{lr} w \leftarrow w+\eta y_i</em>x_i \ b \leftarrow b+\eta y_i  \end{array} \right. $</li>
+          <li>其中$\eta$ 学习率一般为0-1之间</li>
+        </ol>
+      </li>
+      <li>来段代码解析
+        <ol>
+          <li>例题来自李航《统计学习方法》的感知机部分
+ <img src="https://pic1.zhimg.com/80/v2-0575c3efd5d8e1322aaf1d6ef18808ac_hd.jpg" alt="" /></li>
+          <li>例题解析
+            <ol>
+              <li>构建优化函数： $min_{w,b}J(w,b) = -\sum_{x_i \in M}y_i(w \cdot x + b)$</li>
+              <li>求解w, b, 为了计算方便，设 $\eta=0.1$ （$\eta$为学习率，建议设置 0-1之间）</li>
+            </ol>
+          </li>
+          <li>
+            <p>步骤
+     取初值: w=[0 0] b=1
+     0:w=[0 0] b=1x=[3 3] 预测正确,跳过
+     0:w=[0 0] b=1x=[4 3] 预测正确,跳过
+     0:w=[0 0] b=1x=[1 1] 预测错误,更新w,b
+     i=0 w=[-1 -1] b=0</p>
+
+            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1:w=[-1 -1] b=0x=[3 3] 预测错误,更新w,b
+ i=1 w=[2 2] b=1
+            
+ 2:w=[2 2] b=1x=[3 3] 预测正确,跳过
+ 2:w=[2 2] b=1x=[4 3] 预测正确,跳过
+ 2:w=[2 2] b=1x=[1 1] 预测错误,更新w,b
+ i=2 w=[1 1] b=0
+            
+ 3:w=[1 1] b=0x=[3 3] 预测正确,跳过
+ 3:w=[1 1] b=0x=[4 3] 预测正确,跳过
+ 3:w=[1 1] b=0x=[1 1] 预测错误,更新w,b
+ i=3 w=[0 0] b=-1
+            
+ 4:w=[0 0] b=-1x=[3 3] 预测错误,更新w,b
+ i=4 w=[3 3] b=0
+            
+ 5:w=[3 3] b=0x=[3 3] 预测正确,跳过
+ 5:w=[3 3] b=0x=[4 3] 预测正确,跳过
+ 5:w=[3 3] b=0x=[1 1] 预测错误,更新w,b
+ i=5 w=[2 2] b=-1
+            
+ 6:w=[2 2] b=-1x=[3 3] 预测正确,跳过
+ 6:w=[2 2] b=-1x=[4 3] 预测正确,跳过
+ 6:w=[2 2] b=-1x=[1 1] 预测错误,更新w,b
+ i=6 w=[1 1] b=-2
+            
+ 7:w=[1 1] b=-2x=[3 3] 预测正确,跳过
+ 7:w=[1 1] b=-2x=[4 3] 预测正确,跳过
+ 7:w=[1 1] b=-2x=[1 1] 预测错误,更新w,b
+ i=7 w=[0 0] b=-3
+            
+ 8:w=[0 0] b=-3x=[3 3] 预测错误,更新w,b
+ i=8 w=[3 3] b=-2
+            
+ 9:w=[3 3] b=-2x=[3 3] 预测正确,跳过
+ 9:w=[3 3] b=-2x=[4 3] 预测正确,跳过
+ 9:w=[3 3] b=-2x=[1 1] 预测错误,更新w,b
+ i=9 w=[2 2] b=-3
+            
+ 10:w=[2 2] b=-3x=[3 3] 预测正确,跳过
+ 10:w=[2 2] b=-3x=[4 3] 预测正确,跳过
+ 10:w=[2 2] b=-3x=[1 1] 预测错误,更新w,b
+ i=10 w=[1 1] b=-4
+            
+ 11:w=[1 1] b=-4x=[3 3] 预测正确,跳过
+ 11:w=[1 1] b=-4x=[4 3] 预测正确,跳过
+ 11:w=[1 1] b=-4x=[1 1] 预测正确,跳过
+ w=[1 1] b= 第11 次更新时得到解
+</code></pre></div>            </div>
+          </li>
+          <li>
+            <p>代码</p>
+
+            <p>```c++
+     #李航《统计学方法》p29 例2.1
+     #正例：x1=(3,3), x2=(4,3),
+     #负例：x3=(1,1)</p>
+
+            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> import numpy as np
+ import matplotlib.pyplot as plt
+ # x取值，样本数据，对应的是一个二维向量
+ p_x = np.array([[3, 3], [4, 3], [1, 1]])
+ # y取值，样本数据对应的正负标签，-1=负样本， +1=正样本
+ y = np.array([1, 1, -1])
+            
+ # 输出样本数据，其中正样本为红色，负样本为蓝色
+ plt.figure()
+ for i in range(len(p_x)):
+     if y[i] == 1:
+         plt.plot(p_x[i][0], p_x[i][1], 'ro')
+     else:
+         plt.plot(p_x[i][0], p_x[i][1], 'bo')
+ w = np.array([0, 0])
+ b = 1
+ delta = 1
+             
+ print("取初值: w=" + str(w) + " b=" + str(b))
+ for i in range(100):
+     choice = -1
+     for j in range(len(p_x)):
+         y_pred = np.sign(np.dot(w, p_x[j]) + b)
+         if y[j] != y_pred:
+             print(str(i)+":w="+str(w)+" b="+str(b)+"x="+str(p_x[j])+" 预测错误,更新w,b")
+             choice = j
+             break
+         else:
+             print(str(i)+":w="+str(w)+" b="+str(b)+"x="+str(p_x[j])+" 预测正确,跳过")
+            
+     if choice == -1:
+         print("w=" + str(w) + " b=" + " 第" + str(i) + " 次更新时得到解")
+         break
+     w = w + delta * y[choice]*p_x[choice]
+     b = b + delta * y[choice]
+     print("i=" + str(i) + " w=" + str(w) +" b=" + str(b) + "\n")
+             
+ line_x = [0, 10]
+ line_y = [0, 0]
+             
+ for i in range(len(line_x)):
+     line_y[i] = (-w[0] * line_x[i]- b)/w[1]
+             
+ plt.plot(line_x, line_y)
+        
+ ```
+</code></pre></div>            </div>
+          </li>
+          <li>输出
+<img src="/assets/images//15432216556174.jpg" alt="" /></li>
         </ol>
       </li>
     </ol>
   </li>
 </ol>
+
 
   </section>
 </article>
