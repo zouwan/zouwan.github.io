@@ -178,14 +178,12 @@ $$\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y
             
            ```python
                 #李航《统计学方法》p29 例2.1, 正例：x1=(3,3), x2=(4,3),负例：x3=(1,1)
-
                 import numpy as np
                 import matplotlib.pyplot as plt
                 # x取值，样本数据，对应的是一个二维向量
                 p_x = np.array([[3, 3], [4, 3], [1, 1]])
                 # y取值，样本数据对应的正负标签，-1=负样本， +1=正样本
                 y = np.array([1, 1, -1])
-                
                 # 输出样本数据，其中正样本为红色，负样本为蓝色
                 plt.figure()
                 for i in range(len(p_x)):

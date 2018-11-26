@@ -5,8 +5,8 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 26 Nov 2018 21:00:35 +0800</pubDate>
-    <lastBuildDate>Mon, 26 Nov 2018 21:00:35 +0800</lastBuildDate>
+    <pubDate>Mon, 26 Nov 2018 21:01:28 +0800</pubDate>
+    <lastBuildDate>Mon, 26 Nov 2018 21:01:28 +0800</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -270,7 +270,6 @@ sign(x)=\begin{cases} +1,x&gt;0 \\ -1,x&lt;0 \\ \end{cases} %]]&gt;&lt;/script&g
  p_x = np.array([[3, 3], [4, 3], [1, 1]])
  # y取值，样本数据对应的正负标签，-1=负样本， +1=正样本
  y = np.array([1, 1, -1])
-            
  # 输出样本数据，其中正样本为红色，负样本为蓝色
  plt.figure()
  for i in range(len(p_x)):
