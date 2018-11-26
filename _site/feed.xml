@@ -5,9 +5,20 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 26 Nov 2018 10:58:23 +0800</pubDate>
-    <lastBuildDate>Mon, 26 Nov 2018 10:58:23 +0800</lastBuildDate>
+    <pubDate>Mon, 26 Nov 2018 14:59:09 +0800</pubDate>
+    <lastBuildDate>Mon, 26 Nov 2018 14:59:09 +0800</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>梯度下降法</title>
+        <description>&lt;p&gt;#&lt;/p&gt;
+</description>
+        <pubDate>Mon, 26 Nov 2018 00:00:00 +0800</pubDate>
+        <link>/2018/11/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/</link>
+        <guid isPermaLink="true">/2018/11/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Perception</title>
@@ -22,157 +33,151 @@
         });
     &lt;/script&gt;
 &lt;/head&gt;
-&lt;h3 id=&quot;什么是感知机perception&quot;&gt;什么是感知机(Perception)？&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;b&gt;感知机&lt;/b&gt;(perceptron)是二类分类的线性分类模型,其输入为实例的特征向量,输出为实例的类别,取+1和-1二值.&lt;/li&gt;
-  &lt;li&gt;感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于 &lt;b&gt;判别模型&lt;/b&gt;。&lt;/li&gt;
-  &lt;li&gt;感知机学习旨在求出将训练数据进行线性划分的分离超平面，为此导入了基于误分类的损失函数，利用梯度下降法对损失函数进行极小化，求得感知机模型。&lt;/li&gt;
-  &lt;li&gt;感知机学习算法具有简单而易于实现的优点，分为原始形式和对偶形式。&lt;/li&gt;
-  &lt;li&gt;感知机是神经网络与支持向量机的基础。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;感知机模型&quot;&gt;感知机模型&lt;/h3&gt;
+&lt;h3 id=&quot;1-什么是感知机perception&quot;&gt;1. 什么是感知机(Perception)？&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;感知机满足输入空间到输出空间的如下函数称为感知机：&lt;/p&gt;
+  &lt;li&gt;&lt;b&gt;感知机&lt;/b&gt;(perceptron)是二类分类的线性分类模型,其输入为实例的特征向量,输出为实例的类别,取+1和-1二值.
+    &lt;ul&gt;
+      &lt;li&gt;感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于 &lt;b&gt;判别模型&lt;/b&gt;。&lt;/li&gt;
+      &lt;li&gt;感知机学习旨在求出将训练数据进行线性划分的分离超平面，为此导入了基于误分类的损失函数，利用梯度下降法对损失函数进行极小化，求得感知机模型。&lt;/li&gt;
+      &lt;li&gt;感知机学习算法具有简单而易于实现的优点，分为原始形式和对偶形式。&lt;/li&gt;
+      &lt;li&gt;感知机是神经网络与支持向量机的基础。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
-    &lt;script type=&quot;math/tex; mode=display&quot;&gt;f(x)=sign(wx+b)&lt;/script&gt;
-
-    &lt;p&gt;其中 w 称为权值(weight，b 称为偏置(bias), sign为激活函数&lt;/p&gt;
-
-    &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+&lt;h3 id=&quot;2-感知机模型原理&quot;&gt;2. 感知机模型原理&lt;/h3&gt;
+&lt;p&gt;感知机满足输入空间到输出空间的如下函数称为感知机：
+    &lt;script type=&quot;math/tex&quot;&gt;f(x)=sign(wx+b)&lt;/script&gt; 其中 w 称为权值(weight，b 称为偏置(bias), sign为激活函数
+    &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
 sign(x)=\begin{cases} +1,x&gt;0 \\ -1,x&lt;0 \\ \end{cases} %]]&gt;&lt;/script&gt;
-
-    &lt;p&gt;sign(x) 将大于0的分为1， 小于0的分为-1.&lt;/p&gt;
-
+   sign(x) 将大于0的分为1， 小于0的分为-1.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;感知机相比逻辑回归主要区别是 &lt;b&gt;激活函数不同&lt;/b&gt;
     &lt;ol&gt;
-      &lt;li&gt;
-        &lt;p&gt;感知机相比逻辑回归主要区别是 &lt;b&gt;激活函数不同&lt;/b&gt;
- 感知机激活函数是 sign(x),又称单位阶跃函数
- 逻辑回归（logistic regression)激活函数是 sigmoid
- sigmoid一般取阈值0.5， 大于0.5的分为1， 小于0.1的分为0
- 逻辑回归也被看做是一种概率估计， 详见逻辑回归(todo)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;感知机原理
-        &lt;ol&gt;
-          &lt;li&gt;给每一个属性一个权重，对属性和权重乘积求和得到的结果和一个阈值进行比较，可以输出一个二分类结果。比如判定是否能够给张三放贷
-&lt;br /&gt;&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-      &lt;li&gt;感知机的几何解释:
-        &lt;ol&gt;
-          &lt;li&gt;感知机可以用线性方程表示；
- &lt;script type=&quot;math/tex&quot;&gt;w \cdot x+b=0&lt;/script&gt;&lt;/li&gt;
-          &lt;li&gt;几何意义如下图:
- &lt;img src=&quot;https://pic2.zhimg.com/80/v2-7bd3d267a3d50a511b4b51aace348301_hd.png&quot; alt=&quot;image&quot; /&gt;&lt;/li&gt;
-          &lt;li&gt;啥？超平面 （黑脸问号)
-            &lt;ol&gt;
-              &lt;li&gt;超平面在二维空间里就是直线，方程是a&lt;em&gt;x+b&lt;/em&gt;y+c=0&lt;/li&gt;
-              &lt;li&gt;超平面在三维空间里就是平面，方程是a&lt;em&gt;x+b&lt;/em&gt;y+c*z+d=0&lt;/li&gt;
-              &lt;li&gt;在n维空间里推广就是就是a&lt;em&gt;x+b&lt;/em&gt;y+c*z+……..+k=0
-(a,b,c…)对应向量w, 是由平面确定的数，
-   （x,y,z..)是平面上任一点的坐标，对应方程的向量x
-&lt;br /&gt;&lt;/li&gt;
-            &lt;/ol&gt;
-          &lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-      &lt;li&gt;对应于特征空间Rn中的一个超平面S，其中w是超平面的法向量，b是超平面的截距。这个超平面将特征空间划分为两个部分，位于两部分的点分别被分为正、负两类。因此，超平面S称为分离超平面（separating hyperplanes）
- &lt;br /&gt; 假定 $wx+b=0$是一个超平面，令$g(x)=wx+b$,即超平面上的所有点都满足$g(x)=0$. 对于超平面的一侧点满足 $g(x)&amp;gt;0$, 另一侧满足 $g(x)&amp;lt;0$.
- &lt;br /&gt;&lt;/li&gt;
-      &lt;li&gt;对于不在超平面上的点x到超平面的举例是 &lt;b&gt; $ r=\frac {g(x)}{\left|w \right|}$&lt;/b&gt;
-  &lt;br /&gt; 证明：见下图，其中 O 为原点， $X_p$为超平面上的点， X 是超平面外的点， w 为超平面法向量
-  &lt;br /&gt;&lt;img src=&quot;https://img-blog.csdn.net/20171015173343056?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSmFzdGVyX3dpc2RvbQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;image&quot; /&gt;
-  &lt;br /&gt; (1) $X=X_p+r * \frac{w}{ \left|w\right|}$
-        &lt;blockquote&gt;
-          &lt;p&gt;向量基本运算法则：$ OX = OX_p + X_pX$; w为法向量，所以 $\frac{w}{\left|w\right|}$ 是垂直于超平面的单位向量&lt;/p&gt;
-        &lt;/blockquote&gt;
-      &lt;/li&gt;
+      &lt;li&gt;感知机激活函数是 sign(x),又称单位阶跃函数&lt;/li&gt;
+      &lt;li&gt;逻辑回归（logistic regression)激活函数是 sigmoid&lt;/li&gt;
+      &lt;li&gt;sigmoid一般取阈值0.5， 大于0.5的分为1， 小于0.1的分为0&lt;/li&gt;
+      &lt;li&gt;逻辑回归也被看做是一种概率估计， 详见逻辑回归(todo)&lt;/li&gt;
     &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;工作原理
+    &lt;ol&gt;
+      &lt;li&gt;给每一个属性一个权重，对属性和权重乘积求和得到的结果和一个阈值进行比较，可以输出一个二分类结果。比如判定是否能够给张三放贷。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;感知机的几何解释:
+    &lt;ol&gt;
+      &lt;li&gt;感知机可以用线性方程表示；
+ &lt;script type=&quot;math/tex&quot;&gt;w \cdot x+b=0&lt;/script&gt;&lt;/li&gt;
+      &lt;li&gt;几何意义如下图:
+ 对应于特征空间Rn中的一个超平面S，其中w是超平面的法向量，b是截距。这个超平面将特征空间划分为两个部分，位于两部分的点分别被分为正、负两类。因此，超平面S称为分离超平面（separating hyperplanes）
+ &lt;img src=&quot;https://pic2.zhimg.com/80/v2-7bd3d267a3d50a511b4b51aace348301_hd.png&quot; alt=&quot;image&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;啥？超平面 （黑脸问号)
+        &lt;ol&gt;
+          &lt;li&gt;超平面在二维空间里就是直线，方程是a&lt;em&gt;x+b&lt;/em&gt;y+c=0&lt;/li&gt;
+          &lt;li&gt;超平面在三维空间里就是平面，方程是a&lt;em&gt;x+b&lt;/em&gt;y+c*z+d=0&lt;/li&gt;
+          &lt;li&gt;在n维空间里推广就是就是a&lt;em&gt;x+b&lt;/em&gt;y+c*z+……..+k=0
+(a,b,c…)对应向量w, 是由平面确定的数，
+   （x,y,z..)是平面上任一点的坐标，对应方程的向量x&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;假定 $wx+b=0$是一个超平面，令$g(x)=wx+b$,即超平面上的所有点都满足$g(x)=0$. 对于超平面的一侧点满足 $g(x)&amp;gt;0$, 另一侧满足 $g(x)&amp;lt;0$.&lt;/li&gt;
+      &lt;li&gt;对于不在超平面上的点x到超平面的距离是 $ r=\frac {g(x)}{\left|w \right|}$
+ 证明：见下图，其中 O 为原点， $X_p$为超平面上的点， X 是超平面外的点， w 为超平面法向量
+&lt;img src=&quot;https://img-blog.csdn.net/20171015173343056?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSmFzdGVyX3dpc2RvbQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;image&quot; /&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;(1) $X=X_p+r * \frac{w}{ \left|w\right|}$&lt;/p&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;向量基本运算法则：$ OX = OX_p + X_pX$; w为法向量，所以 $\frac{w}{\left|w\right|}$ 是垂直于超平面的单位向量&lt;/p&gt;
+    &lt;/blockquote&gt;
 
     &lt;p&gt;(2) $g(x) = w^T(x_p+r\frac{w}{\left|w\right|})+w_0 = (w^T * x_p + w_0) + r * \frac{w^T * w}{\left|w\right|} = r * \left| w \right|$&lt;/p&gt;
     &lt;blockquote&gt;
       &lt;p&gt;等式（1）带入等式 $g(x)=wx+b$, 由于$X_p$在超平面， 所以 $g(X_p) = w^T * x_p + w_0 = 0$&lt;/p&gt;
     &lt;/blockquote&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 结论一得证
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;结论一得证&lt;/p&gt;
-
-&lt;hr /&gt;
+&lt;h3 id=&quot;3-感知机学习目标&quot;&gt;3. 感知机学习目标&lt;/h3&gt;
+&lt;p&gt;  学习参数w与b，确定了w与b，图上的直线（高维空间下为超平面）也就确定了; 感知机的学习目标是找到损失函数,转化为最优化问题&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;感知机学习目标
- &lt;br /&gt;学习参数w与b，确定了w与b，图上的直线（高维空间下为超平面）也就确定了
+  &lt;li&gt;思路一：误分类点数目
     &lt;ol&gt;
-      &lt;li&gt;找到损失函数,转化为最优化问题
-        &lt;ol&gt;
-          &lt;li&gt;误分类点数目
-            &lt;ol&gt;
-              &lt;li&gt;无法函数化表示&lt;/li&gt;
-              &lt;li&gt;w, b 不是连续可导&lt;/li&gt;
-            &lt;/ol&gt;
-          &lt;/li&gt;
-          &lt;li&gt;误分类点距离超平面距离，总距离越小越好
+      &lt;li&gt;无法函数化表示&lt;/li&gt;
+      &lt;li&gt;w, b 不是连续可导&lt;/li&gt;
+      &lt;li&gt;由于上述1，2两点，思路一不可行，考虑思路二&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;思路二：误分类点距离超平面距离，总距离越小越好
  &lt;script type=&quot;math/tex&quot;&gt;\frac{1}{\| w\|} | w \cdot x_0 + b |&lt;/script&gt;
-            &lt;ol&gt;
-              &lt;li&gt;当数据点被误分类(+1吧被误判为-1), 则 $(w \cdot x_0 + b) &amp;lt; 0 $, 此时预测值 $y_i$=+1, 满足 $-y_i(w \cdot x_0 + b) &amp;gt; 0$&lt;/li&gt;
-              &lt;li&gt;当数据点被误分类(-1吧被误判为+1), 则 $(w \cdot x_0 + b) &amp;gt; 0 $, 此时预测值 $y_i$=-1, 满足 $y_i(w \cdot x_0 + b) &amp;gt; 0 $&lt;/li&gt;
-            &lt;/ol&gt;
-          &lt;/li&gt;
-          &lt;li&gt;损失函数
-            &lt;ol&gt;
-              &lt;li&gt;上式不考虑$|w|$, 去掉后面的绝对值，得到损失函数:
- &lt;script type=&quot;math/tex&quot;&gt;L(w,b) = -\sum_{x_i\in M}{y_i(w \cdot x_i + b)}&lt;/script&gt;
- 其中M 为误分类点数目&lt;/li&gt;
-              &lt;li&gt;感知机不关心实际超平面距离每个点的距离（定量，误分类点的距离），只关心最终分类是否正确（定性，误分类点的个数）&lt;/li&gt;
-            &lt;/ol&gt;
-          &lt;/li&gt;
-          &lt;li&gt;损失函数推导：
-   &lt;br /&gt; &lt;script type=&quot;math/tex&quot;&gt;w*x_i+b&gt;0时， y_i=-1&lt;/script&gt;即把正例预测为负例 或
-   &lt;br /&gt; &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
-w*x_i+b&lt;0时， y_i=1 %]]&gt;&lt;/script&gt;j即把负例预测为正例
-   &lt;br /&gt; 可以得到误分类点到超平面总的距离是
-   &lt;br /&gt;
-   &lt;br /&gt;&lt;script type=&quot;math/tex&quot;&gt;-\frac{1}{\left\|w\right\|}\sum_{x_i \in M}{y_i*(w*x_i+b)}&lt;/script&gt;
-  &lt;br /&gt; &lt;script type=&quot;math/tex&quot;&gt;-\sum_{x_i \in M}{y_i*(w*x_i+b)}&lt;/script&gt;&lt;/li&gt;
-        &lt;/ol&gt;
+    &lt;ol&gt;
+      &lt;li&gt;当数据点被误分类(+1吧被误判为-1), 则 $(w \cdot x_0 + b) &amp;lt; 0 $, 此时预测值 $y_i$=+1, 满足 &lt;script type=&quot;math/tex&quot;&gt;-y_i(w \cdot x_0 + b) &gt; 0&lt;/script&gt;&lt;/li&gt;
+      &lt;li&gt;当数据点被误分类(-1吧被误判为+1), 则 $(w \cdot x_0 + b) &amp;gt; 0 $, 此时预测值 $y_i$=-1, 满足 &lt;script type=&quot;math/tex&quot;&gt;y_i(w \cdot x_0 + b) &gt; 0&lt;/script&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;损失函数确定
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;上式不考虑$|w|$, 去掉后面的绝对值，得到损失函数:
+ &lt;script type=&quot;math/tex&quot;&gt;J(w,b) = -\sum_{x_i\in M}{y_i(w \cdot x_i + b)}，M为误分类点集&lt;/script&gt;&lt;/p&gt;
       &lt;/li&gt;
-      &lt;li&gt;更新策略（梯度下降）
+      &lt;li&gt;
+        &lt;p&gt;感知机不关心实际超平面距离每个点的距离（定量，误分类点的距离），只关心最终分类是否正确（定性，误分类点的个数）&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;损失函数推导：
+把正例预测为负例： $w&lt;em&gt;x_i+b&amp;gt;0时， y_i=-1$
+把负例预测为正例： $w&lt;/em&gt;x_i+b&amp;lt;0时， y_i=1$
+可以得到误分类点到超平面总的距离是（注意， 只考虑不在超平面的点）
+&lt;script type=&quot;math/tex&quot;&gt;-\frac{1}{\left\|w\right\|}\sum_{x_i \in M}{y_i*(w*x_i+b)}&lt;/script&gt; &lt;script type=&quot;math/tex&quot;&gt;-\sum_{x_i \in M}{y_i*(w*x_i+b)}&lt;/script&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;更新策略（梯度下降）
+    &lt;ol&gt;
+      &lt;li&gt;对损失函数计算梯度（梯度下降）
+&lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} \nabla_{w}{L(w,b)} = -\sum_{x \in M}{y_i * x_i} \\ \nabla_{b}{L(w,b)} = -\sum_{x \in M}{y_i} \end{array} \right.&lt;/script&gt;&lt;br /&gt;
+这里使用随机梯度（随机选取误分类点$(x_i, y_i)$对 w, b 进行更新， 更新公式如下：
+&lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y_i  \end{array} \right.&lt;/script&gt;&lt;/li&gt;
+      &lt;li&gt;如何理解上面更新公式？(from &lt;a href=&quot;https://www.zhihu.com/question/57747902&quot;&gt;知乎&lt;/a&gt;)
         &lt;ol&gt;
-          &lt;li&gt;对损失函数计算梯度（梯度下降）
-  &lt;br /&gt;&lt;br /&gt;&lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} \nabla_{w}{L(w,b)} = -\sum_{x \in M}{y_i * x_i} \\ \nabla_{b}{L(w,b)} = -\sum_{x \in M}{y_i} \end{array} \right.&lt;/script&gt;&lt;br /&gt;
-  这里使用随机梯度（随机选取误分类点$(x_i, y_i)$对 w, b 进行更新， 更新公式如下：
-  &lt;br /&gt;&lt;br /&gt;&lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y_i  \end{array} \right.&lt;/script&gt;&lt;br /&gt;&lt;/li&gt;
-          &lt;li&gt;如何理解上面更新公式？(from &lt;a href=&quot;https://www.zhihu.com/question/57747902&quot;&gt;知乎&lt;/a&gt;)
-            &lt;ol&gt;
-              &lt;li&gt;梯度更新公式确实不是推导而是创造出来的，所以只能从概念上去理解&lt;/li&gt;
-              &lt;li&gt;设想下有个函数，你的目标是：找到一个参数$\theta$ 使得它的值$Y$最小。但它很复杂，你无法找到这个参数的解析解，所以你希望通过梯度下降法去猜这个参数&lt;/li&gt;
-              &lt;li&gt;问题是怎么猜？
- &lt;br /&gt;对于多数有连续性的函数来说，显然不可能把每个$\theta$都试一遍。所以只能先随机取一个$\theta$，然后看看怎么调整它最有可能使得$\theta$变小。
- &lt;br /&gt;把这个过程重复n遍，自然最后得到的$\theta$的估值会越来越小。
- &lt;br /&gt;现在问题是怎么调整？既然要调整，肯定是基于当前我们拥有的那个参数$\theta$，所以有了：那现在问题是每次更新的时候这个$\theta$应该取什么值？
- &lt;br /&gt;我们知道关于某变量的（偏）导数的概念是指当（仅仅）该变量往 &lt;b&gt;正向&lt;/b&gt; 的变化量趋向于0时的其函数值变化量的极限。 所以现在若求$\theta$关于的导数，得到一个值比如:5,那就说明若现在我们把$\theta$往正向（即增大）一点点，$\theta$的值会变大，但不一定是正好+5。同理若现在导数是-5，那么把$\theta$增大一点点$Y$值会变小。&lt;br /&gt;
- &lt;br /&gt;这里我们发现不管导数值$\theta$是正的还是负的（正负即导数的方向），对于$Y$来说，$-\theta$的最终方向（即最终的正负号，决定是增（+）还是减（-））一定是能将Y值变小的方向（除非导数为0）。所以有了:
+          &lt;li&gt;梯度更新公式确实不是推导而是创造出来的，所以只能从概念上去理解&lt;/li&gt;
+          &lt;li&gt;设想下有个函数，你的目标是：找到一个参数$\theta$ 使得它的值$Y$最小。但它很复杂，你无法找到这个参数的解析解，所以你希望通过梯度下降法去猜这个参数&lt;/li&gt;
+          &lt;li&gt;问题是怎么猜？
+ 对于多数有连续性的函数来说，显然不可能把每个$\theta$都试一遍。所以只能先随机取一个$\theta$，然后看看怎么调整它最有可能使得$\theta$变小。
+ 把这个过程重复n遍，自然最后得到的损失函数L的估值会越来越小&lt;/li&gt;
+          &lt;li&gt;调整策略（参考文章:[梯度下降法]）
+ 基于当前我们拥有的那个参数$\theta$，所以有了：&lt;script type=&quot;math/tex&quot;&gt;\theta_{t+1}=\theta_t + \Delta&lt;/script&gt;那现在问题是每次更新的时候这个$\theta$应该取什么值？
+ 我们知道关于某变量的（偏）导数的概念是指当（仅仅）该变量往 &lt;b&gt;正向&lt;/b&gt; 的变化量趋向于0时的其函数值变化量的极限。若求Y关于$\theta_t$的导数，得到一个值比如+5, 那就说明若现在我们把$\theta_t$往负向移动，损失函数 $J(w,b）$的值会变小，但不一定是正好-5。同理若现在导数是-5，那么把$\theta$往 &lt;b&gt;负向&lt;/b&gt;移动，损失函数$J(w,b)$值会变小。&lt;br /&gt;
+ 不管导数值$\theta$是正的还是负的(正负即导数的方向), 对于$J(w,b)$来说，$-\theta$的最终方向（即最终的正负号，决定是增(+)还是减(-))一定是能将$J(w,b)$值变小的方向（除非导数为0）。所以有了:
  &lt;script type=&quot;math/tex&quot;&gt;\theta_{t+1}=\theta_t + (-\Delta)&lt;/script&gt;但是说到底，$\Delta$的绝对值只是个关于Y的变化率，本质上和$\theta_t$没关系。所以为了抹去$\Delta$在幅度上对$\theta_t$的影响，需要一个学习率来控制：$\alpha$。所以有了：$\alpha \in \left(0,1\right]$
  &lt;script type=&quot;math/tex&quot;&gt;\theta_{t+1}=\theta_t + (-\alpha \Delta) =\theta_t -\alpha \Delta&lt;/script&gt;就是有多少个参数，就有多少个不同的$\Delta$。
- &lt;br /&gt;现在分析在梯度下降法中最常听到的一句话：“梯度下降法就是朝着梯度的反方向迭代地调整参数直到收敛。”   这里的梯度就是 $\Delta$ ,而梯度的反方向就是 $-\Delta$ 的符号方向—梯度实际上是个向量。所以这个角度来说，即使我们只有一个参数需要调整，也可以认为它是个一维的向量。 
+ &lt;br /&gt;现在分析在梯度下降法中最常听到的一句话：“梯度下降法就是朝着梯度的反方向迭代地调整参数直到收敛。” 这里的梯度就是 $\Delta$ ,而梯度的反方向就是 $-\Delta$ 的符号方向—梯度实际上是个向量。所以这个角度来说，即使我们只有一个参数需要调整，也可以认为它是个一维的向量。 
  &amp;lt;br&lt;b&gt;整个过程你可以想象自己站在一个山坡上，准备走到山脚下（最小值的地方），于是很自然地你会考虑朝着哪个方向走，方向由$\Delta$的方向给出，而至于一次走多远，由$|\alpha\Delta|$来控制。这种方式相信你应该能理解其只能找到局部最小值，而不是全局的。&lt;/b&gt;&lt;/li&gt;
-              &lt;li&gt;换个角度看，想象损失函数是$y=x^2$的抛物线形式
+          &lt;li&gt;换个角度看，想象损失函数是$y=x^2$的抛物线形式，其梯度为 $y’=2x$
+            &lt;ol&gt;
+              &lt;li&gt;纵坐标y表示损失函数，横坐标x表示参数 $\theta$&lt;/li&gt;
+              &lt;li&gt;$\theta$在最低点左边时，导数小于0，只有$\theta$往右边（最低点方向）走，损失函数才会变小，即$\theta$要往导数的负方向变化
                 &lt;ol&gt;
-                  &lt;li&gt;纵坐标表示损失函数大小，横坐标表示参数 $\theta$&lt;/li&gt;
-                  &lt;li&gt;$\theta$在最低点左边时，导数小于0，只有$\theta$往右边（最低点方向）走，损失函数才会变小，即$\theta$要往导数的负方向变化&lt;/li&gt;
-                  &lt;li&gt;$\theta$在最低点右边时，导数大于0，只有$\theta$往左边（最低点方向）走，损失函数才会变小，即$\theta$要往导数的负方向变化&lt;/li&gt;
+                  &lt;li&gt;当 x=-2; y=-4, 此时往负向损失函数$y$增大，往正向走损失函数$y$减少&lt;/li&gt;
                 &lt;/ol&gt;
               &lt;/li&gt;
+              &lt;li&gt;$\theta$在最低点右边时，导数大于0，只有$\theta$往左边（最低点方向）走，损失函数才会变小，即$\theta$要往导数的负方向变化
+ 1.当 x=+2; y=+4, 此时往正向损失函数$y$增大，往负向走损失函数$y$减少          &lt;br /&gt;
+ &lt;img src=&quot;/assets/images//15432151219295.jpg&quot; alt=&quot;-w450&quot; /&gt;}}&lt;/li&gt;
             &lt;/ol&gt;
           &lt;/li&gt;
-          &lt;li&gt;更新方法
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;更新方法
  &lt;br /&gt;对于感知机模型 $f(x)=sign(w*x+b)$
-            &lt;ol&gt;
-              &lt;li&gt;选取初值 $w_0, b_0$&lt;/li&gt;
-              &lt;li&gt;在训练集选择数据 $(x_i, y_i)$&lt;/li&gt;
-            &lt;/ol&gt;
-          &lt;/li&gt;
+        &lt;ol&gt;
+          &lt;li&gt;选取初值 $w_0, b_0$&lt;/li&gt;
+          &lt;li&gt;在训练集选择数据 $(x_i, y_i)$&lt;/li&gt;
         &lt;/ol&gt;
       &lt;/li&gt;
     &lt;/ol&gt;
