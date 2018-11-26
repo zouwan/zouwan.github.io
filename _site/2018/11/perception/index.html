@@ -367,18 +367,20 @@ sign(x)=\begin{cases} +1,x>0 \\ -1,x<0 \\ \end{cases} %]]></script>
           <li>
             <p>代码</p>
 
-            <p>```python
-     #李航《统计学方法》p29 例2.1
-     #正例：x1=(3,3), x2=(4,3),
-     #负例：x3=(1,1)
-     import numpy as np
-     import matplotlib.pyplot as plt
-     # x取值，样本数据，对应的是一个二维向量
-     p_x = np.array([[3, 3], [4, 3], [1, 1]])
-     # y取值，样本数据对应的正负标签，-1=负样本， +1=正样本
-     y = np.array([1, 1, -1])</p>
+            <p>```python</p>
 
-            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # 输出样本数据，其中正样本为红色，负样本为蓝色
+            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> #李航《统计学方法》p29 例2.1
+ #正例：x1=(3,3), x2=(4,3),
+ #负例：x3=(1,1)
+            
+ import numpy as np
+ import matplotlib.pyplot as plt
+ # x取值，样本数据，对应的是一个二维向量
+ p_x = np.array([[3, 3], [4, 3], [1, 1]])
+ # y取值，样本数据对应的正负标签，-1=负样本， +1=正样本
+ y = np.array([1, 1, -1])
+            
+ # 输出样本数据，其中正样本为红色，负样本为蓝色
  plt.figure()
  for i in range(len(p_x)):
      if y[i] == 1:
