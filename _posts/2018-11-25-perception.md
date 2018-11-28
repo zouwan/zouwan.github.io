@@ -1,14 +1,3 @@
-<head>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
-            }
-        });
-    </script>
-</head>
 ### 1. 什么是感知机(Perception)？
 1. <b>感知机</b>(perceptron)是二类分类的线性分类模型,其输入为实例的特征向量,输出为实例的类别,取+1和-1二值.
 * 感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于 <b>判别模型</b>。
@@ -48,8 +37,8 @@
      (1) $X=X_p+r * \frac{w}{ \left\|w\right\|}$
 >向量基本运算法则：$ OX = OX_p + X_pX$; w为法向量，所以 $\frac{w}{\left\|w\right\|}$ 是垂直于超平面的单位向量
   
-     (2) $g(x) = w^T(x_p+r\frac{w}{\left\|w\right\|})+w_0 = (w^T * x_p + w_0) + r * \frac{w^T * w}{\left\|w\right\|} = r * \left\| w \right\|$
->等式（1）带入等式 $g(x)=wx+b$, 由于$X_p$在超平面， 所以 $g(X_p) = w^T * x_p + w_0 = 0$
+     (2) $g(x) = w^T(x_p+r\frac{w}{\left\|w\right\|})+b = (w^T * x_p + b) + r * \frac{w^T * w}{\left\|w\right\|} = r * \left\| w \right\|$
+>等式（1）带入等式 $g(x)=wx+b$, 由于$X_p$在超平面， 所以 $g(X_p) = w^T * x_p + b = 0$
   
         结论一得证
   
@@ -68,18 +57,20 @@
     $$ J(w,b) = -\sum_{x_i\in M}{y_i(w \cdot x_i + b)}，M为误分类点集 $$
     
     1. 感知机不关心实际超平面距离每个点的距离（定量，误分类点的距离），只关心最终分类是否正确（定性，误分类点的个数）
-1. 损失函数推导：
+1. 损失函数推导
     1. 把正例预测为负例： $w*x_i+b>0时， y_i=-1$
     2. 把负例预测为正例： $w*x_i+b<0时， y_i=1$
     3. 可以得到误分类点到超平面总的距离是（注意， 只考虑不在超平面的点）
         $$-\frac{1}{\left\|w\right\|}\sum_{x_i \in M}{y_i*(w*x_i+b)}$$ 
-        其中$\left\|w\right\|$可以忽略（原因1：$frac{1}{\left\|w\right\|}$ 不影响正负的判断，即不影响学习算法的中间过程我们；原因2：感知机训练终止条件是所有样本正确分类, 即不存在误分类点，因此$frac{1}{\left\|w\right\|}$ 对最终结果无影响），得到损失函数：
+        其中$\left\|w\right\|$可以忽略（原因1：$\frac{1}{\left\|w\right\|}$ 不影响正负的判断，即不影响学习算法的中间过程我们；原因2：感知机训练终止条件是所有样本正确分类, 即不存在误分类点，因此$\frac{1}{\left\|w\right\|}$ 对最终结果无影响），得到损失函数：
         $$-\sum_{x_i \in M}{y_i*(w*x_i+b)}$$
 
 2. 更新策略（梯度下降）
     1. 对损失函数计算梯度（梯度下降）
-$$\left\{ \begin{array}{lr} \nabla_{w}{L(w,b)} = -\sum_{x \in M}{y_i * x_i} \\ \nabla_{b}{L(w,b)} = -\sum_{x \in M}{y_i} \end{array} \right. $$<br>
-这里使用随机梯度（随机选取误分类点$(x_i, y_i)$对 w, b 进行更新， 更新公式如下：
+$$\left\{ \begin{array}{lr} \nabla_{w}{L(w,b)} = -\sum\limits_{x \in M}{y_i * x_i} \\ \nabla_{b}{L(w,b)} = -\sum\limits_{x \in M}{y_i} \end{array} \right. $$<br>
+使用批梯度（选取所有误分类点取平均对 w, b 进行更新)， 更新公式如下：
+$$\left\{ \begin{array}{lr} w \leftarrow w+\eta \frac{1}{N}\sum\limits_{x^{(i)},y^{(i)} \in M}y_i*x_i \\ b \leftarrow b+\eta \sum\limits_{y^{(i)} \in M }y_i  \end{array} \right. $$
+使用随机梯度（随机选取误分类点$(x_i, y_i)$对 w, b 进行更新)， 更新公式如下：
 $$\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y_i  \end{array} \right. $$
     2. 如何理解上面更新公式？(from [知乎](https://www.zhihu.com/question/57747902))
         1. 梯度更新公式确实不是推导而是创造出来的，所以只能从概念上去理解
@@ -102,7 +93,6 @@ $$\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y
             3. $\theta$在最低点右边时，导数大于0，只有$\theta$往左边（最低点方向）走，损失函数才会变小，即$\theta$要往导数的负方向变化
                 1.当 x=+2; y=+4, 此时往正向损失函数$y$增大，往负向走损失函数$y$减少            
                 ![-w450](/assets/images//15432151219295.jpg)
-
 
     3. 更新方法
         <br>对于感知机模型 $f(x)=sign(w*x+b)$
@@ -177,7 +167,8 @@ $$\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y
            
             
            ```python
-                #李航《统计学方法》p29 例2.1, 正例：x1=(3,3), x2=(4,3),负例：x3=(1,1)
+                # 李航《统计学方法》p29 例2.1
+                # 正例：x1=(3,3), x2=(4,3),负例：x3=(1,1)
                 import numpy as np
                 import matplotlib.pyplot as plt
                 # x取值，样本数据，对应的是一个二维向量
@@ -229,3 +220,22 @@ $$\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y
 ![](/assets/images//15432216556174.jpg)
 
         
+1. 对偶形式
+感知机算法对偶形式的目的是降低运算量（当特征空间的维度很高时）。 每次感知机梯度下降算法的迭代都是选择一个误分类样本数据更新$w,b$参数。整个迭代过程中，对于从来没有被误分类的样本，其被选择参与$w,b$迭代的次数是0， 假设样本点$(x_{(i)},y_{(i)}) \in M$在迭代更新$w,b$时被使用了$k_i$次，因此在原始感知机算法中，算法最后收敛时，$w,b$为:
+    $$\begin{alignat}{2} & w =\eta\sum_{i=1}^{K}k_ix^{(i)}y^{(i)} \\ & b=\eta\sum_{i=1}^{K}k_iy^{(i)} \end{alignat}$$
+    将 $w,b$回代原始感知机模型
+    $$\begin{alignat}{1} f(x)=sign(wx+b)=sign(\eta\sum_{i=1}^{K}k_ix^{(i)}y^{(i)} \cdot x + \eta\sum_{i=1}^{K}k_iy^{(i)})\end{alignat}$$
+    此时，学习目标不再是$w,b$,而是$k_i, i=1,2,...,N$, 相应的训练过程为：
+    1. 初始时，$\forall n_i=0$
+    2. 在训练集选取数据$(x_i, y_i)$
+    3. 如果$y_i(\sum_{j=1}^{N}n_j\eta y_jx_j \cdot x_i + \sum_{j=1}^{N}n_j\eta y_j) \leq 0 $, 更新 $n_i \leftarrow n_i + 1， i=i+1$
+    4. 转至2. 直至没有误分类数据
+可以看到，相比原始形式训练过程区别在于步骤3，样本点的特征向量以内积的形式存在于感知机对偶形式的训练算法中，可以事先计算好所有内积（即 Gram 矩阵），就可以加速训练。
+
+
+---
+参考：
+&emsp;&emsp;1. [Pincard-感知机原理小结](http://www.cnblogs.com/pinard/p/6042320.html)
+
+
+

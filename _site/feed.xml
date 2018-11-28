@@ -5,9 +5,105 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 26 Nov 2018 21:01:28 +0800</pubDate>
-    <lastBuildDate>Mon, 26 Nov 2018 21:01:28 +0800</lastBuildDate>
+    <pubDate>Wed, 28 Nov 2018 15:31:46 +0800</pubDate>
+    <lastBuildDate>Wed, 28 Nov 2018 15:31:46 +0800</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>对偶durality</title>
+        <description>&lt;h2 id=&quot;什么是对偶&quot;&gt;什么是对偶&lt;/h2&gt;
+&lt;p&gt;  两个黄鹂鸣翠柳，一行白鹭上青天， 这两句诗就是对偶：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;两 &amp;lt;-&amp;gt; 一
+个 &amp;lt;-&amp;gt; 行
+黄鹂 &amp;lt;-&amp;gt; 白鹭
+鸣 &amp;lt;-&amp;gt;上
+翠柳 &amp;lt;-&amp;gt; 青天
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;  从上面的对偶诗句可以看出来， 对偶问jj题就好比一个线性空间V每一个向量, 在另外一个线性空间$V^&lt;em&gt;$都存在一个对应的映射向量。$V^{&lt;strong&gt;}$ 则是 $V^{*}$的对偶， V 和$V^{&lt;/strong&gt;}$是标准同构的; V 和$V^&lt;/em&gt;$是同构（不标准同构）。&lt;/p&gt;
+
+&lt;h3 id=&quot;为什么要研究对偶问题&quot;&gt;为什么要研究对偶问题&lt;/h3&gt;
+&lt;p&gt;  对偶问题优化问题中非常重要的方法，类似文学中的对偶，也是一种配对方式，将数学结构 A 转换为另一种对等的数学结构 B。在优化问题中，可以将非凸优化问题转化为凸优化问题进行求解。&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;判断原问题是否有最优解， 若对偶问题有最优解，则原问题有最优解。&lt;/li&gt;
+  &lt;li&gt;对偶问题往往比原问题更简单，更容易判断是否有最优解，更容易求解
+    &lt;ol&gt;
+      &lt;li&gt;比如 Svm 对偶问题
+        &lt;ol&gt;
+          &lt;li&gt;求解原问题 $y=wx+b$, 求解算法复杂度与样本维度（等于权值 w 的维度）有关；&lt;/li&gt;
+          &lt;li&gt;对偶问题 $L(a)$， 求解算法复杂度与样本数量（等于拉格朗日算子a的数量）有关；当特征维度很高时， 求解原问题复杂度会非常大， 而对偶问题就相对容易了。&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;对于感知机
+        &lt;ol&gt;
+          &lt;li&gt;原问题在每一轮迭代至少都要判断某个输入实例是否误判点，即对于 $x_i, y_i$，是否有$y_i(wx_i+b) \leq 0$. 运算量集中在计算输入实例$x_i$和权值向量$w$的内积，时间复杂度为$\Theta(N)$, 计算复杂度跟特征维度相关，当特征维度很高时，运算极慢&lt;/li&gt;
+          &lt;li&gt;对偶形式输入实例$(x_i,y_i)$是否误判的条件变换为$y_i(\sum_{j=1}{N}a_jy_jx_jx_i + b) \leq 0$ 输入实例以内积形式出现，可以预先计算两两之间的内积（即 Gram 矩阵），这样每次做误判检测时直接从 Gram 矩阵查表得到内积$x_jx_i$, 所以这个误判检测的时间复杂度是$\Theta(N)$， 其中 N 为训练样本数量， n 为特征维度&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;考虑下面的线性规划问题（LP），如何求得函数的下界：
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} \min_{x,y} &amp; \quad x+3y \\ s.t &amp; \quad x+y &amp; \geq &amp; 2 \\ &amp; \quad x,y &amp; \geq &amp; 0\end{alignat} %]]&gt;&lt;/script&gt;
+考虑图解法： 分别绘制 $x+3y=0$（蓝线), $x+y=2$(黑线);通过移动蓝线位置，是的蓝线右上方的所有点满足点x&amp;gt;0, y&amp;gt;0的约束。蓝线移动到红线位置得到最优解2，黄线位置 $x+3y=0.6$ 则不满足约束, （x,y）=(0,0.2)不满足 $x+y \geq 2$
+&lt;img src=&quot;/assets/images//15432973484100.jpg&quot; alt=&quot;&quot; /&gt;
+  通过作图，可以获得上述LP 问题的最小值2. 换一个角度，如果我们利用以下变换获得目标函数的最小值:
+    &lt;script type=&quot;math/tex&quot;&gt;\begin{alignat}{2} x+y \geq  2 \\ + \quad 2y \geq 0 \\ = \quad x+3y \geq 2 \end{alignat}&lt;/script&gt;
+从变化后的目标函数得出， x+3y 的最小值为2。 对上述LP问题泛化， 可以得到：
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} \min_{x,y} &amp; \quad px+qy \\ s.t. &amp; \quad x+y \geq 2 \\  &amp; \quad  x,y \geq 0 \end{alignat} %]]&gt;&lt;/script&gt;
+类似于上面的变换方法， 可以获得:
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} &amp; \quad a(x+y) \geq 2a \\ &amp; + \quad bx \geq 0 \\ &amp; + \quad cy \geq 0 \\ &amp; = \quad (a+b)x+(a+c)y \geq 2a \end{alignat} %]]&gt;&lt;/script&gt;
+可以指定 $a+b=p$, $a+c=q$, 则上述问题最优解为$2a$, 这里$2a$为$px+qy$的下界，即 $px+qy \geq 2a$ 永远成立。为了下界最大化，找到满足约束条件 $a+b=p$ 和 $a+c=q$的最大值，才能求得$px+qy$的最小值，综上，上述 LP 问题转换为下面形式的最大值：
+    &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2}  \max_{a,b,c} &amp; \quad 2a \\ s.t &amp; \quad a+b=p \\ &amp; \quad a+c=q \\ &amp; \quad a,b,c \geq 0 \end{alignat} %]]&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;此时， 上述变换为原问题(Primal)的对偶(dual)问题&lt;/p&gt;
+
+&lt;h3 id=&quot;线性规划的对偶问题&quot;&gt;线性规划的对偶问题&lt;/h3&gt;
+&lt;p&gt;对于线性规划问题：
+    &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} \min_{x \in \mathbb{R}^n} &amp; \quad c^Tx \\ s.t. &amp; \quad Ax=b \\ &amp; \quad Gx \leq h \end{alignat} %]]&gt;&lt;/script&gt;
+转换为：
+    &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} &amp; \quad -u^TAx = -b^Tu \\ + &amp; \quad -v^TGx \geq -h^Tv \\ = &amp; \quad (-A^Tu-G^Tv)^Tx \geq -b^Tu -h^Tv \end{alignat} %]]&gt;&lt;/script&gt;
+令c=$-A^Tu-G^Tv$, 得到对偶问题，可以获得 LP 问题解的下界是$-b^Tu -h^Tv $ ：
+    &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} \max_{u \in \mathbb{R}^m, v \in \mathbb{R}^r} &amp; \quad -b^Tu-h^Tv \\ s.t. &amp; \quad -A^Tu-G^Tv = c \\ &amp; \quad v \geq 0\end{alignat} %]]&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;拉格朗日函数&quot;&gt;拉格朗日函数&lt;/h3&gt;
+&lt;p&gt;根据 LP 对偶问题的构建方法， 可以令
+&lt;script type=&quot;math/tex&quot;&gt;\begin{alignat}{2} L(x,u,v)=c^Tx + u^T(Ax-b) + v^T(Gx-h), v \geq 0 \end{alignat}&lt;/script&gt; 由于$Ax-b=0$且$v^T(Gx-h&amp;lt;=0)$, 因此 $L(x,u,v) \leq c^Tx$
+假设集合 C 是原问题的解集， $f^\star$为最优解，则对于任意$u,v \geq 0$, 可以得到
+&lt;script type=&quot;math/tex&quot;&gt;\begin{alignat}{2} \begin{split} f^\star=\min\limits_{x \in C}C^Tx \geq \min\limits_{x \in C}L(x,u,v) \geq \min\limits_{x}L(x,u,v) \\ \geq \min\limits_x(c + u^TA+v^TG)^Tx - u^Tb-v^Th := g(u,v)  \end{split} \end{alignat}&lt;/script&gt;
+其中 $\min\limits_xL(x,u,v)$是关于 x 的线性函数，最小值是$-\infty$, 所以只有当 x 的系数$(c + u^TA+v^TG)=0$,才能保证求得原问题的最小值。此时&lt;script type=&quot;math/tex&quot;&gt;\begin{alignat}{2} g(u,v)=\min\limits_xL(x,u,v)=-b^Tu-h^Tv \end{alignat}&lt;/script&gt;,综上所述， 可以获得$g(u,v)$的一般形式：
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{equation} g(u,v)=\begin{cases} -b^Tu-h^Tv &amp; \quad if c=-u^TA-v^TG \\ -\infty &amp; \quad otherwize \end{cases}\end{equation} %]]&gt;&lt;/script&gt;
+最大化函数$g(u,v),可以获得原函数的紧致下界（tightest bound), 与LP 对偶问题的定义一致。拉格朗日变换可以适用于任意优化问题上（甚至非凸优化问题）。可以根据有约束的优化问题获得函数$L(x,u,v),然后求解$\min\limits_xL(x,u,v)$得到函数$g(u,v)$,即为原问题的对偶问题。
+对于一般性有约束优化问题，数学描述如下：
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{3}\min\limits_x &amp; \quad f(x) \\ s.t. &amp; \quad h_i(x) \leq 0, i=1,...,m \\ &amp; \quad l_i(x)=0,j=1,...,r\end{alignat} %]]&gt;&lt;/script&gt;
+无论$f(x)$是否为凸函数，都可以定义&lt;b&gt;拉格朗日函数(Lagrangian)为：&lt;/b&gt;
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} L(x,u,v)=\begin{cases} f(x)+\sum\limits_{i=1}^mu_ih_i(x)+\sum\limits_{j=1}{r}v_jl_j(x),&amp;\quad u \geq 0 \\ -\infty, &amp; \quad for \quad u &lt; 0 \end{cases} \end{alignat} %]]&gt;&lt;/script&gt;
+假设集合 C 为原问题的解集合，$f^\star$为最优解，对于任意$x$, 最小化函数$L(x,u,v)$可以获得函数下界：&lt;script type=&quot;math/tex&quot;&gt;f^\star=\min\limits_{x\in C}c^Tx \geq \min\limits_{x \in C}L(x,u,v) \geq \min\limits_{x}L(x,u,v):=g(u,v)&lt;/script&gt;
+函数$g(u,v)$为==拉格朗日对偶函数(Lagrange dual function)==,可行解$u,v u \geq 0$给定了$f^\star$的下界,最大化$g(u,v)$，可获得$f^\star$的逼近解。&lt;/p&gt;
+&lt;h3 id=&quot;对偶函数实例二次规划&quot;&gt;对偶函数实例：二次规划&lt;/h3&gt;
+&lt;p&gt;用拉格朗日对偶函数解决二次函数优化问题， 定义二次规划
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} \begin{split} \min\limits_x &amp; \quad \frac{1}{2}x^TQx + c^Tx \quad Q \succ 0 \\ s.t &amp; \quad Ax=b \\ &amp; \quad x \geq 0 \end{split} \end{alignat} %]]&gt;&lt;/script&gt; 对应的拉格朗日函数为&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} \begin{split} L(x,u,v) &amp; \quad =\frac{1}{2}x^TQx + c^Tx -u^Tx+v^T(Ax-b) \\ &amp; \quad =\frac{1}{2}x^TQx + (c+v^TA-u)^Tx + v^Tb \end{split} \end{alignat} %]]&gt;&lt;/script&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 27 Nov 2018 00:00:00 +0800</pubDate>
+        <link>/2018/11/%E5%AF%B9%E5%81%B6durality/</link>
+        <guid isPermaLink="true">/2018/11/%E5%AF%B9%E5%81%B6durality/</guid>
+        
+        
+      </item>
     
       <item>
         <title>梯度下降法</title>
@@ -22,18 +118,7 @@
     
       <item>
         <title>Perception</title>
-        <description>&lt;head&gt;
-    &lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-        MathJax.Hub.Config({
-            tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
-            }
-        });
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;h3 id=&quot;1-什么是感知机perception&quot;&gt;1. 什么是感知机(Perception)？&lt;/h3&gt;
+        <description>&lt;h3 id=&quot;1-什么是感知机perception&quot;&gt;1. 什么是感知机(Perception)？&lt;/h3&gt;
 &lt;ol&gt;
   &lt;li&gt;&lt;b&gt;感知机&lt;/b&gt;(perceptron)是二类分类的线性分类模型,其输入为实例的特征向量,输出为实例的类别,取+1和-1二值.
     &lt;ul&gt;
@@ -92,9 +177,9 @@ sign(x)=\begin{cases} +1,x&gt;0 \\ -1,x&lt;0 \\ \end{cases} %]]&gt;&lt;/script&g
       &lt;p&gt;向量基本运算法则：$ OX = OX_p + X_pX$; w为法向量，所以 $\frac{w}{\left|w\right|}$ 是垂直于超平面的单位向量&lt;/p&gt;
     &lt;/blockquote&gt;
 
-    &lt;p&gt;(2) $g(x) = w^T(x_p+r\frac{w}{\left|w\right|})+w_0 = (w^T * x_p + w_0) + r * \frac{w^T * w}{\left|w\right|} = r * \left| w \right|$&lt;/p&gt;
+    &lt;p&gt;(2) $g(x) = w^T(x_p+r\frac{w}{\left|w\right|})+b = (w^T * x_p + b) + r * \frac{w^T * w}{\left|w\right|} = r * \left| w \right|$&lt;/p&gt;
     &lt;blockquote&gt;
-      &lt;p&gt;等式（1）带入等式 $g(x)=wx+b$, 由于$X_p$在超平面， 所以 $g(X_p) = w^T * x_p + w_0 = 0$&lt;/p&gt;
+      &lt;p&gt;等式（1）带入等式 $g(x)=wx+b$, 由于$X_p$在超平面， 所以 $g(X_p) = w^T * x_p + b = 0$&lt;/p&gt;
     &lt;/blockquote&gt;
 
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 结论一得证
@@ -130,21 +215,23 @@ sign(x)=\begin{cases} +1,x&gt;0 \\ -1,x&lt;0 \\ \end{cases} %]]&gt;&lt;/script&g
       &lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
-  &lt;li&gt;损失函数推导：
+  &lt;li&gt;损失函数推导
     &lt;ol&gt;
       &lt;li&gt;把正例预测为负例： $w*x_i+b&amp;gt;0时， y_i=-1$&lt;/li&gt;
       &lt;li&gt;把负例预测为正例： $w*x_i+b&amp;lt;0时， y_i=1$&lt;/li&gt;
       &lt;li&gt;可以得到误分类点到超平面总的距离是（注意， 只考虑不在超平面的点）
  &lt;script type=&quot;math/tex&quot;&gt;-\frac{1}{\left\|w\right\|}\sum_{x_i \in M}{y_i*(w*x_i+b)}&lt;/script&gt; 
- 其中$\left|w\right|$可以忽略（原因1：$frac{1}{\left|w\right|}$ 不影响正负的判断，即不影响学习算法的中间过程我们；原因2：感知机训练终止条件是所有样本正确分类, 即不存在误分类点，因此$frac{1}{\left|w\right|}$ 对最终结果无影响），得到损失函数：
+ 其中$\left|w\right|$可以忽略（原因1：$\frac{1}{\left|w\right|}$ 不影响正负的判断，即不影响学习算法的中间过程我们；原因2：感知机训练终止条件是所有样本正确分类, 即不存在误分类点，因此$\frac{1}{\left|w\right|}$ 对最终结果无影响），得到损失函数：
  &lt;script type=&quot;math/tex&quot;&gt;-\sum_{x_i \in M}{y_i*(w*x_i+b)}&lt;/script&gt;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;更新策略（梯度下降）
     &lt;ol&gt;
       &lt;li&gt;对损失函数计算梯度（梯度下降）
-&lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} \nabla_{w}{L(w,b)} = -\sum_{x \in M}{y_i * x_i} \\ \nabla_{b}{L(w,b)} = -\sum_{x \in M}{y_i} \end{array} \right.&lt;/script&gt;&lt;br /&gt;
-这里使用随机梯度（随机选取误分类点$(x_i, y_i)$对 w, b 进行更新， 更新公式如下：
+&lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} \nabla_{w}{L(w,b)} = -\sum\limits_{x \in M}{y_i * x_i} \\ \nabla_{b}{L(w,b)} = -\sum\limits_{x \in M}{y_i} \end{array} \right.&lt;/script&gt;&lt;br /&gt;
+使用批梯度（选取所有误分类点取平均对 w, b 进行更新)， 更新公式如下：
+&lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} w \leftarrow w+\eta \frac{1}{N}\sum\limits_{x^{(i)},y^{(i)} \in M}y_i*x_i \\ b \leftarrow b+\eta \sum\limits_{y^{(i)} \in M }y_i  \end{array} \right.&lt;/script&gt;
+使用随机梯度（随机选取误分类点$(x_i, y_i)$对 w, b 进行更新)， 更新公式如下：
 &lt;script type=&quot;math/tex&quot;&gt;\left\{ \begin{array}{lr} w \leftarrow w+\eta y_i*x_i \\ b \leftarrow b+\eta y_i  \end{array} \right.&lt;/script&gt;&lt;/li&gt;
       &lt;li&gt;如何理解上面更新公式？(from &lt;a href=&quot;https://www.zhihu.com/question/57747902&quot;&gt;知乎&lt;/a&gt;)
         &lt;ol&gt;
@@ -262,26 +349,26 @@ sign(x)=\begin{cases} +1,x&gt;0 \\ -1,x&lt;0 \\ \end{cases} %]]&gt;&lt;/script&g
             &lt;p&gt;代码&lt;/p&gt;
 
             &lt;p&gt;```python
-     #李航《统计学方法》p29 例2.1, 正例：x1=(3,3), x2=(4,3),负例：x3=(1,1)&lt;/p&gt;
+     # 李航《统计学方法》p29 例2.1
+     # 正例：x1=(3,3), x2=(4,3),负例：x3=(1,1)
+     import numpy as np
+     import matplotlib.pyplot as plt
+     # x取值，样本数据，对应的是一个二维向量
+     p_x = np.array([[3, 3], [4, 3], [1, 1]])
+     # y取值，样本数据对应的正负标签，-1=负样本， +1=正样本
+     y = np.array([1, 1, -1])
+     # 输出样本数据，其中正样本为红色，负样本为蓝色
+     plt.figure()
+     for i in range(len(p_x)):
+         if y[i] == 1:
+             plt.plot(p_x[i][0], p_x[i][1], ‘ro’)
+         else:
+             plt.plot(p_x[i][0], p_x[i][1], ‘bo’)
+     w = np.array([0, 0])
+     b = 1
+     delta = 1&lt;/p&gt;
 
-            &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; import numpy as np
- import matplotlib.pyplot as plt
- # x取值，样本数据，对应的是一个二维向量
- p_x = np.array([[3, 3], [4, 3], [1, 1]])
- # y取值，样本数据对应的正负标签，-1=负样本， +1=正样本
- y = np.array([1, 1, -1])
- # 输出样本数据，其中正样本为红色，负样本为蓝色
- plt.figure()
- for i in range(len(p_x)):
-     if y[i] == 1:
-         plt.plot(p_x[i][0], p_x[i][1], 'ro')
-     else:
-         plt.plot(p_x[i][0], p_x[i][1], 'bo')
- w = np.array([0, 0])
- b = 1
- delta = 1
-             
- print(&quot;取初值: w=&quot; + str(w) + &quot; b=&quot; + str(b))
+            &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; print(&quot;取初值: w=&quot; + str(w) + &quot; b=&quot; + str(b))
  for i in range(100):
      choice = -1
      for j in range(len(p_x)):
@@ -317,7 +404,26 @@ sign(x)=\begin{cases} +1,x&gt;0 \\ -1,x&lt;0 \\ \end{cases} %]]&gt;&lt;/script&g
       &lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
+  &lt;li&gt;对偶形式
+感知机算法对偶形式的目的是降低运算量（当特征空间的维度很高时）。 每次感知机梯度下降算法的迭代都是选择一个误分类样本数据更新$w,b$参数。整个迭代过程中，对于从来没有被误分类的样本，其被选择参与$w,b$迭代的次数是0， 假设样本点$(x_{(i)},y_{(i)}) \in M$在迭代更新$w,b$时被使用了$k_i$次，因此在原始感知机算法中，算法最后收敛时，$w,b$为:
+ &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{alignat}{2} &amp; w =\eta\sum_{i=1}^{K}k_ix^{(i)}y^{(i)} \\ &amp; b=\eta\sum_{i=1}^{K}k_iy^{(i)} \end{alignat} %]]&gt;&lt;/script&gt;
+ 将 $w,b$回代原始感知机模型
+ &lt;script type=&quot;math/tex&quot;&gt;\begin{alignat}{1} f(x)=sign(wx+b)=sign(\eta\sum_{i=1}^{K}k_ix^{(i)}y^{(i)} \cdot x + \eta\sum_{i=1}^{K}k_iy^{(i)})\end{alignat}&lt;/script&gt;
+ 此时，学习目标不再是$w,b$,而是$k_i, i=1,2,…,N$, 相应的训练过程为：
+    &lt;ol&gt;
+      &lt;li&gt;初始时，$\forall n_i=0$&lt;/li&gt;
+      &lt;li&gt;在训练集选取数据$(x_i, y_i)$&lt;/li&gt;
+      &lt;li&gt;如果$y_i(\sum_{j=1}^{N}n_j\eta y_jx_j \cdot x_i + \sum_{j=1}^{N}n_j\eta y_j) \leq 0 $, 更新 $n_i \leftarrow n_i + 1， i=i+1$&lt;/li&gt;
+      &lt;li&gt;转至2. 直至没有误分类数据
+可以看到，相比原始形式训练过程区别在于步骤3，样本点的特征向量以内积的形式存在于感知机对偶形式的训练算法中，可以事先计算好所有内积（即 Gram 矩阵），就可以加速训练。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;参考：
+  1. &lt;a href=&quot;http://www.cnblogs.com/pinard/p/6042320.html&quot;&gt;Pincard-感知机原理小结&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 25 Nov 2018 00:00:00 +0800</pubDate>
