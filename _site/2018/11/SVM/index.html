@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>Svm</title>
+  <meta name="description" content="SVM-支持向量机1. SVM 的目标  SVM 的目标是找出能够最大化训练集数据间隔（margin）的最优分类超平面。SVM 是一种监督学习==分类==算法，可以用于预测某个数据所述类别。SVM 也被称为最大间隔分类。如下图左侧为线性分类器，右图为 SVM， 可以看出添加更多的样本点在”街道”外不会影响到判定边...">
+  <meta name="author" content="Wei Wang">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Svm">
+  <meta name="twitter:description" content="SVM-支持向量机1. SVM 的目标  SVM 的目标是找出能够最大化训练集数据间隔（margin）的最优分类超平面。SVM 是一种监督学习==分类==算法，可以用于预测某个数据所述类别。SVM 也被称为最大间隔分类。如下图左侧为线性分类器，右图为 SVM， 可以看出添加更多的样本点在”街道”外不会影响到判定边...">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Svm">
+  <meta property="og:description" content="SVM-支持向量机1. SVM 的目标  SVM 的目标是找出能够最大化训练集数据间隔（margin）的最优分类超平面。SVM 是一种监督学习==分类==算法，可以用于预测某个数据所述类别。SVM 也被称为最大间隔分类。如下图左侧为线性分类器，右图为 SVM， 可以看出添加更多的样本点在”街道”外不会影响到判定边...">
+  
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="/2018/11/SVM/">
+  <link rel="alternate" type="application/rss+xml" title="噢!乖" href="/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/assets/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/#blog" title="前往 噢!乖 的主页" class="blog-button"><img src="/assets/images/avatar.jpg" width="80" alt="噢!乖 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for 噢!乖" class="blog-button">噢!乖</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">乖乖</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description"></p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="Visit blog" class="blog-button">Blog</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          
+          <div><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/zouwan" title="@zouwan 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+  
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:zouwan@gmail.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+  </ul>
+</nav>
+</div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-slate"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-11-28 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2018-11-28</time> &#8226; <span class="post-meta__tags tags"></span>
+    </div>
+    <h1 class="post-title">Svm</h1>
+  </header>
+
+  <section class="post">
+    <h2 id="svm-支持向量机">SVM-支持向量机</h2>
+<h3 id="1-svm-的目标">1. SVM 的目标</h3>
+<p>  SVM 的目标是找出能够最大化训练集数据间隔（margin）的最优分类超平面。SVM 是一种监督学习==分类==算法，可以用于预测某个数据所述类别。SVM 也被称为最大间隔分类。如下图左侧为线性分类器，右图为 SVM， 可以看出添加更多的样本点在”街道”外不会影响到判定边界，只有位于”街道”边缘的样本点对判定其到作用个， 这样的样本点称为”支持向量”,支持向量包含着重构分割超平面所需要的全部信息.
+  ==SVM对特征缩放比较敏感== 见下图，特征缩放后的判定边界要更优,原因是在计算距离时，不同量纲的特征放到一起来计算可能使结果产生较大偏差， 比如两个向量分别是身高（单位米）、体重（单位公斤）由于二者的量纲不一致导致计算出来的向量就可能有较大偏差。
+参考 <a href="https://my.oschina.net/u/3851199/blog/1944830">特征缩放对哪些机器学习算法结果有影响</a>
+<img src="https://segmentfault.com/img/bVbb8Z0?w=568&amp;h=147" alt="" /></p>
+
+<p>对于下面的训练数据， 见下图，绘制了男人和女人的身高体重散点图:
+<img src="https://upload-images.jianshu.io/upload_images/30697-9e58434c09dea5c3.png?imageMogr2/auto-orient/" alt="" />
+需要使用SVM来预测如下问题：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>给定一个人的身高、体重，判断这个人是男人还是女人？
+</code></pre></div></div>
+
+<h3 id="2-分类超平面">2. 分类超平面</h3>
+<p>感知机里面已经了解了什么是分类超平面，SVM也是通过分类超平面来对数据做分类，</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>一维情况下对应一个点
+二维情况下对应一条直线
+三维情况下对应一个平面
+N维对应的就是分类超平面 对于上面的判断性别问题， 可以用如下的直线作为分类超平面： ![](https://upload-images.jianshu.io/upload_images/30697-1eaa7027f35dc6f5.png?imageMogr2/auto-orient/)
+</code></pre></div></div>
+
+<h3 id="3-最优分类超平面">3. 最优分类超平面</h3>
+<p>SVM学习的目标是能够找到最好的分类超平面，对于上例的性别预测问题，理想情况下对每一个数据都能够正确区分性别。对于给定的数据集，存在多个分类超平面，如下图：
+<img src="https://upload-images.jianshu.io/upload_images/30697-c1810657e03f2350.png?imageMogr2/auto-orient/" alt="" />
+上面这些分类超平面（对应的绿色、黑车、红色和灰色的线），对于样本数据都能够正确完成分类工作，但是对于真实数据表现各不相同， 比如绿色的分类超平面对于下面这些数据就不能很好的区分：
+<img src="https://upload-images.jianshu.io/upload_images/30697-e164fa0c28f3188b.png?imageMogr2/auto-orient/" alt="" />
+分析出现错误的原因， 可以发现如果选择了一个靠近某一类数据的超平面，有可能对于靠近的这类数据的分类效果不够理想，因此，SVM算法尝试选择一个==尽可能远离每一种类别数据点的超平面==， 见下图：
+<img src="https://upload-images.jianshu.io/upload_images/30697-5ff13b39686064f9.png?imageMogr2/auto-orient/" alt="" />
+从上图可以看出，相比于绿线，黑线的分类效果更准确，因此我们可以得到 SVM 寻找最优分类超平面的目标：
+    1. 正确的分类训练数据
+    2. 更重要的是正确的预测(分类)未知数据</p>
+<h3 id="最优超平面的选择margin">最优超平面的选择–Margin</h3>
+<p><img src="https://upload-images.jianshu.io/upload_images/30697-61ebfe0f810e4c39.png?imageMogr2/auto-orient/" alt="" />
+如上图是我们选择的最优超平面，图中的 margin（也叫<strong>间隔</strong>）是超平面距离最近的一个点的距离乘2. Margin 可以理解为一个”无人区”，在 Margin 内部不存在任何数据点。但是这样的超平面有多个，我们如何找到最优的超平面？
+<img src="https://upload-images.jianshu.io/upload_images/30697-8b8d4b02007b65ad.png?imageMogr2/auto-orient/" alt="" />
+如上图的Margin B 相比前图的Margin A要小的多，但是直觉来看，Margin A的分类效果更好，从图中观察到：
+    1. 如果超平面十分接近某个数据点， 那么他的 Margin 就会很小
+    2. 超平面距离数据点越远，Margin 越大
+这意味着，最优超平面是拥有最大 Margin 的那个超平面；而 SVM 学习的目标就是==找到最大化训练集数据间隔的最优分类超平面==</p>
+<h3 id="margin-如何计算">Margin 如何计算</h3>
+<p>先来看超平面的定义：
+<script type="math/tex">w^Tx = 0</script>
+其中$w^T$是向量，比如二维向量的情况 
+<script type="math/tex">\begin{aligned} y=ax+b \Rightarrow y-ax-b=0 \Rightarrow w=(-b, -a, 1), x=(1,x,y)\end{aligned}</script> 
+Margin 可以理解为超平面外任意一个点到超平面的投影点的距离，可以先考虑二维的情况（再扩展到N维向量），假设下图的$y$为分类超平面，$x$ 超平面外的数据点，则 Margin 为$x$在分类超平面上的投影点的距离$x$的距离
+已知向量$x=(x_1,x_2),y=(y_1,y_2)$，夹角为$\theta$, 下面证明公式(1)成立 : <script type="math/tex">\begin{aligned}x\cdot y= \left\|x\right\|\left\|y\right\|\cos(\theta)\end{aligned}</script>如下图：
+<img src="https://i1.wp.com/www.svm-tutorial.com/wp-content/uploads/2014/11/11-dot-product-angles.png?zoom=2&amp;resize=350%2C273&amp;ssl=1" alt="" /><br />
+$\theta=\beta-\alpha$ 因此计算$\cos(\theta)=\cos(\beta-\alpha)=\cos(\beta)\cos(\alpha)+\sin(\beta)\sin(\alpha)$
+$\begin{aligned} \begin{split} \cos(\beta)=\frac{x_1}{\left|x\right|} \ \sin(\beta)=\frac{x_2}{\left|x\right|} \\cos(\alpha)=\frac{y_1}{\left|y\right|} \ \sin(\alpha)=\frac{y_2}{\left|y\right|}\end{split} \end{aligned}$
+代数公式(2)：
+<script type="math/tex">\begin{aligned} \begin{split} \cos(\theta)=\cos(\beta-\alpha)=\cos(\beta)\cos(\alpha)+\sin(\beta)\sin(\alpha) \\ = \frac{x_1}{\left\|x\right\|}\frac{y_1}{\left|y\right\|} + \frac{x_2}{\left\|x\right\|}\frac{y_2}{\left|y\right\|}=\frac{x_1y_1+x_2y_2}{\left\|x\right\|\left|y\right\|}=\frac{x \cdot y}{\left\|x\right\|\left|y\right\|}  \end{split} \end{aligned}</script>
+我们要计算的 Margin 就是下图的$x-z$, 
+<img src="https://i0.wp.com/www.svm-tutorial.com/wp-content/uploads/2014/11/14-projection-3-e1415553165199.png?zoom=2&amp;resize=350%2C244&amp;ssl=1" alt="" />
+由于：
+<script type="math/tex">\begin{aligned} \begin{split} \cos(\theta)=\frac{\left\|z\right\|}{\left\|x\right\|} \end{split} \end{aligned}</script><script type="math/tex">\begin{aligned} \begin{split} \cos(\theta)=\frac{x \cdot y}{\left\|x\right\|\left|y\right\|} \end{split} \end{aligned}</script><script type="math/tex">\begin{aligned} \begin{split} \left\|z\right\|=\frac{x \cdot y}{\left\|y\right\|} \end{split} \end{aligned}</script>
+定义y的方向向量 $u=\frac{y}{\left|y\right|}$，可以得到 <script type="math/tex">\begin{aligned}  \left\|z\right\|=u\cdot x\\ u=\frac{z}{\left\|z\right\|}\\z=\left\|z\right\|u \end{aligned}</script>
+从前面的推导可以得出向量 x 在 y上的投影的的计算公式为：
+<script type="math/tex">\begin{aligned} z=(u \cdot x)u\end{aligned}</script>从而可以通过计算 $\left|x-z\right|$ 得到Margin</p>
+
+<p>换一个角度， 假设$x_p$为任意样本点$x$在超平面$wx+b=0$上投影的点，r是x到超平面的集合距离(几何间隔), 可以表示为 $x=x_p+r\frac{w}{\left|w\right|}$, 设$g(x)=w^Tx+b$，由定义可知 <script type="math/tex">% <![CDATA[
+\begin{aligned} & g(x_p)=0  \\ & g(x)=w^Tx+b=r\left\|w\right\| \end{aligned} %]]></script> , $g(x)$实际上度量了样本点 x 到超平面的距离， 在$\left|w\right|$恒定情况下，$g(x)$绝对值的大小反应了几何间隔 $r$的大小，$g(x)$叫做函数间隔。</p>
+
+<h3 id="寻找最优分类超平面">寻找最优分类超平面</h3>
+<p>SVM 训练的目标是==最大化训练集数据间隔==, 因此寻找最优分类超平面等价于找到==最大 Margin(间隔)==， SVM 学习的问题可以理解为线性分类问题基础上，添加如下约束条件：
+<script type="math/tex">\begin{aligned}  w\cdot x_i + b \geq 1, for\  x_i\  having\ the \ class\ 1 \\ y_i(w\cdot x_i + b) \geq y_i \cdot 1 == 1\end{aligned}</script>
+<script type="math/tex">\begin{aligned} w\cdot x_i + b \leq -1, for\  x_i\  having\ the \  class\ -1  \\  y_i(w \cdot x_i + b) \geq y_i \cdot -1 == 1 \end{aligned}</script>
+==计算两个超平面距离==
+令$H_0: w\cdot x + b = -1$, $H_1: w\cdot x + b =  1$, m为Margin(间距), $u=\frac{w}{\left|w\right|}$, 向量k为垂直于$H_1,H_0$的向量，$k=mu$，见图：
+<img src="https://i2.wp.com/www.svm-tutorial.com/wp-content/uploads/2015/06/svm_margin_demonstration_7.png?w=720&amp;ssl=1" alt="" />
+<script type="math/tex">w\cdot z_0 + b = 1 \Rightarrow w\cdot (x_0+k) + b =1 \\\Rightarrow w \cdot(x_0+m\frac{w}{\left\|w\right\|}) + b = 1 \\\Rightarrow w\cdot x_0 + b = 1 - m\left\|w\right\| = -1 \\\Rightarrow m = \frac{2}{\left\|w\right\|}</script>
+从上面推导，可以看到Margin(间隔)等于 法向量的L2范数的倒数，因此可以得到优化目标为最大化 $m=\frac{2}{\left|w\right|}$，也就是最小化$\left|w\right|$
+等价于：
+<script type="math/tex">% <![CDATA[
+\begin{aligned} \min &\quad \frac{1}{2}{\left\|w\right\|}^2 \\ s.t. &\quad y_i(w^Tx_i + b) \geq 1\ (i=1,2,...m) \end{aligned} %]]></script>
+为啥是优化 $\min \frac{1}{2}{\left|w\right|}^2$ 而不是优化 $\min {\left|w\right|}$, 因为后者不好求解， 而 ${\left|w\right|}^2$ 是凸优化问题，容易求解，前面的系数 $\frac{1}{2}$ 是为了求解方便添加, 上面的问题可以转换为拉格朗日对偶问题，将约束条件和原始问题放入同一个等式求解。</p>
+<h3 id="软间隔">软间隔</h3>
+<p>当样本线性不可分时，引入松弛向量使得函数间隔加上松弛向量大于等于1. 可以将学习问题构造为规划问题（也称线性支持向量机). 其中C&gt;0为惩罚系数，用来调节对误分类的惩罚大小，最小化目标函数需要使得两项都尽量小， 而 C 用来调节两项关系的
+<script type="math/tex">% <![CDATA[
+\begin{aligned}\min\limits_{w,b,\xi} & \quad \frac{1}{2}{\left\|w\right\|}^2+C\sum\limits_{i=1}^N\xi _i \\ s.t. & \quad y_i(w\cdot x_i+b) \geq 1 - \xi,& \quad i=1,2,...N\\ &\quad \xi \geq 0, &\quad i=1,2,...N\end{aligned} %]]></script></p>
+<h3 id="核技巧">核技巧</h3>
+<p>核技巧基本思想是通过一个非线性变换将<strong>输入空间</strong>映射到一个<strong>特征空间</strong>， 使得输入空间的超曲面模型对应特征空间的一个超平面模型，然后在特征空间中利用线性支持向量机进行求解。在线下支持向量机的对偶问题中，利用核函数$K(x,z)$ 替代内积，求解得到的就是非线性支持向量机
+<script type="math/tex">f(x)=sign(\sum_{i=1}^{N}{\alpha _i}^*y_iK(x,x_i)+b^*)</script></p>
+<h3 id="损失函数优化">损失函数优化</h3>
+<p>参考公式(18)、（19） 通过拉格朗日函数将优化目标转化为无约束优化函数：
+<script type="math/tex">\begin{aligned} L(w,b,a)=\frac{1}{2}{\left\|w\right\|}^2 - \sum\limits_{i=1}^{m}\alpha _i[ y_i(w^Tx_i+b)-1], \alpha _i\geq 0 \end{aligned}</script> 由于引入了拉格朗日算子，优化目标变为:
+<script type="math/tex">\underbrace\min_{w,b} \underbrace\max_{a_i\geq0} L(w,b,a)</script>
+拉格朗日对偶参考:<a href="https://zouwan.github.io/2018/11/%E5%AF%B9%E5%81%B6durality/">对偶durality</a>
+该优化函数满足 KKT 条件， 可以通过拉格朗日对偶将优化问题转化为等价的对偶问题来求解：<script type="math/tex">\underbrace\max_{a_i\geq0} \underbrace\min_{w,b} L(w,b,a)</script></p>
+
+<p>$\hat\gamma \overline\gamma \widetilde\gamma \dot\gamma$</p>
+
+<p>参考:
+<a href="https://www.svm-tutorial.com/2017/02/svms-overview-support-vector-machines/">svm tutorial</a>
+<a href="http://blog.pluskid.org/?p=632">支持向量机: Maximum Margin Classifier</a></p>
+
+  </section>
+</article>
+
+<section class="read-more">
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">最近的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/2018/12/easy-svm/" title="link to Easy svm">Easy svm</a></h2>
+       <p class="excerpt">浅入浅出SVMQuestion ListQ1. 什么是SVM,他能干什么Q2. Svm在ML算法库中处于什么位置？SVM基础知识SVM(support vector machine),中文也叫支持向量机。&hellip;</p>
+       <div class="post-list__meta"><time datetime="2018-12-06 00:00:00 +0800" class="post-list__meta--date date">2018-12-06</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/12/easy-svm/>继续阅读</a></div>
+   </div>
+   
+   
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">更早的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/2018/11/%E5%AF%B9%E5%81%B6durality/" title="link to 对偶durality">对偶durality</a></h2>
+       <p class="excerpt">什么是对偶  两个黄鹂鸣翠柳，一行白鹭上青天， 这两句诗就是对偶：两 &lt;-&gt; 一个 &lt;-&gt; 行黄鹂 &lt;-&gt; 白鹭鸣 &lt;-&gt;上翠柳 &lt;-&gt; 青天  从上面的对偶诗句可以看出来， 对偶问jj题就好比一个线性空间V每一个向量, 在另外一个线性空间$V^$都存在一个对应的映射向量。$V^{}$ 则是 $V^{*}$的对偶， V 和$V^{}$是标准同构的; V 和$V^$是同构（不标准同构）。在优化理论中， 目标函数$f(x)$有多种形式...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2018-11-27 00:00:00 +0800" class="post-list__meta--date date">2018-11-27</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/11/%E5%AF%B9%E5%81%B6durality/>继续阅读</a></div>
+   </div>
+   
+</section>
+
+<section class="post-comments">
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "/2018/11/SVM/";
+        this.page.identifier = "/2018/11/SVM/";
+    };
+
+    var disqus_shortname = 'vno-jekyll';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+    	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-12-06 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">本站采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2018</span>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+    
+  </body>
+
+</html>

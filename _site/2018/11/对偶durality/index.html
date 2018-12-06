@@ -138,7 +138,15 @@
 翠柳 &lt;-&gt; 青天
 </code></pre></div></div>
 
-<p>  从上面的对偶诗句可以看出来， 对偶问jj题就好比一个线性空间V每一个向量, 在另外一个线性空间$V^<em>$都存在一个对应的映射向量。$V^{<strong>}$ 则是 $V^{*}$的对偶， V 和$V^{</strong>}$是标准同构的; V 和$V^</em>$是同构（不标准同构）。</p>
+<p>  从上面的对偶诗句可以看出来， 对偶问jj题就好比一个线性空间V每一个向量, 在另外一个线性空间$V^<em>$都存在一个对应的映射向量。$V^{<strong>}$ 则是 $V^{*}$的对偶， V 和$V^{</strong>}$是标准同构的; V 和$V^</em>$是同构（不标准同构）。
+在优化理论中， 目标函数$f(x)$有多种形式，如果目标函数和约束条件都是变量 $x$的线性函数，称为<strong>线性规划</strong>; 如果目标函数是二次函数，约束条件是线性函数，该优化问题是二次规划； 如果目标函数和约束条件都是非线性函数，该优化为非线性规划；每个规划问题都有一个对应的对偶问题，对偶问题有良好的性质：
+    1. 对偶问题的对偶是原问题
+    2. 无论原始问题是否凸，对偶问题都是凸优化问题
+    3. 对偶问题可以给出原始问题的一个下界
+    4. 当满足一定条件是，原始问题与对偶问题的解释完全等价
+下面是一个原始问题非凸，对偶问题凸的例子：
+    <script type="math/tex">\min\limits_x(x^4-50x^2+100x)\\s.t x \geq 4.5</script>
+    <img src="http://images2015.cnblogs.com/blog/743682/201608/743682-20160801143803840-1888076185.png" alt="" /></p>
 
 <h3 id="为什么要研究对偶问题">为什么要研究对偶问题</h3>
 <p>  对偶问题优化问题中非常重要的方法，类似文学中的对偶，也是一种配对方式，将数学结构 A 转换为另一种对等的数学结构 B。在优化问题中，可以将非凸优化问题转化为凸优化问题进行求解。</p>
@@ -197,10 +205,10 @@
 <script type="math/tex">\begin{alignat}{2} L(x,u,v)=c^Tx + u^T(Ax-b) + v^T(Gx-h), v \geq 0 \end{alignat}</script> 由于$Ax-b=0$且$v^T(Gx-h&lt;=0)$, 因此 $L(x,u,v) \leq c^Tx$
 假设集合 C 是原问题的解集， $f^\star$为最优解，则对于任意$u,v \geq 0$, 可以得到
 <script type="math/tex">\begin{alignat}{2} \begin{split} f^\star=\min\limits_{x \in C}C^Tx \geq \min\limits_{x \in C}L(x,u,v) \geq \min\limits_{x}L(x,u,v) \\ \geq \min\limits_x(c + u^TA+v^TG)^Tx - u^Tb-v^Th := g(u,v)  \end{split} \end{alignat}</script>
-其中 $\min\limits_xL(x,u,v)$是关于 x 的线性函数，最小值是$-\infty$, 所以只有当 x 的系数$(c + u^TA+v^TG)=0$,才能保证求得原问题的最小值。此时<script type="math/tex">\begin{alignat}{2} g(u,v)=\min\limits_xL(x,u,v)=-b^Tu-h^Tv \end{alignat}</script>,综上所述， 可以获得$g(u,v)$的一般形式：
+其中 $\min\limits_xL(x,u,v)$是关于 x 的线性函数，最小值是$-\infty$, 所以只有当 x 的系数$(c + u^TA+v^TG)=0$,才能保证求得原问题的最小值。此时<script type="math/tex">\begin{alignat}{2} g(u,v)=\min\limits_xL(x,u,v)=-b^Tu-h^Tv \end{alignat}</script> 综上所述， 可以获得$g(u,v)$的一般形式：
 <script type="math/tex">% <![CDATA[
-\begin{equation} g(u,v)=\begin{cases} -b^Tu-h^Tv & \quad if c=-u^TA-v^TG \\ -\infty & \quad otherwize \end{cases}\end{equation} %]]></script>
-最大化函数$g(u,v),可以获得原函数的紧致下界（tightest bound), 与LP 对偶问题的定义一致。拉格朗日变换可以适用于任意优化问题上（甚至非凸优化问题）。可以根据有约束的优化问题获得函数$L(x,u,v),然后求解$\min\limits_xL(x,u,v)$得到函数$g(u,v)$,即为原问题的对偶问题。
+\begin{equation} g(u,v)=\begin{cases} -b^Tu-h^Tv & \quad if\ c=-u^TA-v^TG \\ -\infty & \quad otherwize \end{cases}\end{equation} %]]></script>
+最大化函数$g(u,v)$,可以获得原函数的紧致下界（tightest bound), 与LP 对偶问题的定义一致。拉格朗日变换可以适用于任意优化问题上（甚至非凸优化问题）。可以根据有约束的优化问题获得函数$L(x,u,v)$,然后求解$\min\limits_xL(x,u,v)$得到函数$g(u,v)$,即为原问题的对偶问题。
 对于一般性有约束优化问题，数学描述如下：
 <script type="math/tex">% <![CDATA[
 \begin{alignat}{3}\min\limits_x & \quad f(x) \\ s.t. & \quad h_i(x) \leq 0, i=1,...,m \\ & \quad l_i(x)=0,j=1,...,r\end{alignat} %]]></script>
@@ -208,17 +216,34 @@
 <script type="math/tex">% <![CDATA[
 \begin{alignat}{2} L(x,u,v)=\begin{cases} f(x)+\sum\limits_{i=1}^mu_ih_i(x)+\sum\limits_{j=1}{r}v_jl_j(x),&\quad u \geq 0 \\ -\infty, & \quad for \quad u < 0 \end{cases} \end{alignat} %]]></script>
 假设集合 C 为原问题的解集合，$f^\star$为最优解，对于任意$x$, 最小化函数$L(x,u,v)$可以获得函数下界：<script type="math/tex">f^\star=\min\limits_{x\in C}c^Tx \geq \min\limits_{x \in C}L(x,u,v) \geq \min\limits_{x}L(x,u,v):=g(u,v)</script>
-函数$g(u,v)$为==拉格朗日对偶函数(Lagrange dual function)==,可行解$u,v u \geq 0$给定了$f^\star$的下界,最大化$g(u,v)$，可获得$f^\star$的逼近解。</p>
+函数$g(u,v)$为==拉格朗日对偶函数(Lagrange dual function)==,可行解$u,v\ u \geq 0$给定了$f^\star$的下界,最大化$g(u,v)$，可获得$f^\star$的逼近解。</p>
 <h3 id="对偶函数实例二次规划">对偶函数实例：二次规划</h3>
 <p>用拉格朗日对偶函数解决二次函数优化问题， 定义二次规划
 <script type="math/tex">% <![CDATA[
 \begin{alignat}{2} \begin{split} \min\limits_x & \quad \frac{1}{2}x^TQx + c^Tx \quad Q \succ 0 \\ s.t & \quad Ax=b \\ & \quad x \geq 0 \end{split} \end{alignat} %]]></script> 对应的拉格朗日函数为<script type="math/tex">% <![CDATA[
-\begin{alignat}{2} \begin{split} L(x,u,v) & \quad =\frac{1}{2}x^TQx + c^Tx -u^Tx+v^T(Ax-b) \\ & \quad =\frac{1}{2}x^TQx + (c+v^TA-u)^Tx + v^Tb \end{split} \end{alignat} %]]></script></p>
+\begin{alignat}{2} \begin{split} L(x,u,v) & \quad =\frac{1}{2}x^TQx + c^Tx -u^Tx+v^T(Ax-b) \\ & \quad =\frac{1}{2}x^TQx + (c+v^TA-u)^Tx - v^Tb \end{split} \end{alignat} %]]></script> 
+让 L 对 x 求偏导并等于0, ： <script type="math/tex">\lambda=c+v^TA-u \\\nabla_xL(x,u,v)=x^TQ+\lambda^T=0\\ x^T=-\lambda^TQ^{-1}, x=-(Q^{-1})^T\lambda</script>
+得到, L的最小值:
+<script type="math/tex">\begin{alignat}{0}  g(u,v)=\min_{x \in \mathbb{R}}L(x,u,v)=\\\frac{1}{2} (-\lambda^T Q^{-1})Q(- (Q^{-1})^T\lambda) + \lambda^T (-(Q^{-1})^T\lambda) - v^Tb =\\-\frac{1}{2}\lambda^T(Q^{-1})^T\lambda - v^Tb = -\frac{1}{2}\lambda(Q^{-1})\lambda^T - b^Tv , \quad v\geq 0 \end{alignat}</script></p>
+
+<p>参考：
+<a href="http://www.hanlongfei.com/convex/2015/11/05/duality/">凸优化-对偶问题</a>
+<a href="https://www.cnblogs.com/ooon/p/5723725.html">拉格朗日对偶</a>
+<a href="http://www.hanlongfei.com/convex/2015/11/08/kkt/">凸优化-KKT条件</a>
+<a href="https://www.cnblogs.com/dreamvibe/p/4349886.html">写在SVM之前——凸优化与对偶问题</a></p>
 
   </section>
 </article>
 
 <section class="read-more">
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">最近的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/2018/11/SVM/" title="link to Svm">Svm</a></h2>
+       <p class="excerpt">SVM-支持向量机1. SVM 的目标  SVM 的目标是找出能够最大化训练集数据间隔（margin）的最优分类超平面。SVM 是一种监督学习==分类==算法，可以用于预测某个数据所述类别。SVM 也被称为最大间隔分类。如下图左侧为线性分类器，右图为 SVM， 可以看出添加更多的样本点在”街道”外不会影响到判定边界，只有位于”街道”边缘的样本点对判定其到作用个， 这样的样本点称为”支持向量”,支持向量包含着重构分割超平面所需要的全部信息.  ==SVM对特征缩放比较敏感== 见下图，特征缩...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2018-11-28 00:00:00 +0800" class="post-list__meta--date date">2018-11-28</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/11/SVM/>继续阅读</a></div>
+   </div>
    
    
    
@@ -263,7 +288,7 @@
             <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-11-28 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-12-06 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
         <span class="footer__copyright">本站采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2018</span>
     </footer>
 </section>
